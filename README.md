@@ -4,9 +4,14 @@
   <img src="banner.png" alt="Food Chain — Adversarial Stress Test" width="100%" />
 </p>
 
-**Adversarial stress-testing suite for Claude.** Four skills. One install.
-Puts your product ideas, architecture decisions, and execution plans through
-live elimination battles with animal agents. No dependencies. Works everywhere.
+**Your idea has blind spots. This finds them.**
+
+Food Chain spawns adversarial animal agents — each with hardcoded behavioral DNA —
+and pits them against your product idea in live elimination rounds. The weakest
+argument dies each round. The survivor absorbs its sharpest insight and attacks
+a harder version of your idea. One apex predator remains.
+
+That is the thing worth building.
 
 ```
 npx skills add CodedRichy/food-chain-ideation
@@ -14,178 +19,189 @@ npx skills add CodedRichy/food-chain-ideation
 
 ---
 
-## The Suite
+## What happens when you run it
 
-| Skill | What it does | Trigger |
-|---|---|---|
-| **food-chain-ideation** | Stress-test product ideas against a 32-animal behavioral DNA library | "food chain", "pressure test", "what kills this" |
-| **food-chain-code** | Stress-test architecture decisions before writing code | "food chain code", "stress test this architecture" |
-| **apex-to-action** | Turn battle output into a 90-day execution plan | "apex to action", "what do I build first" |
-| **food-chain-monitor** | Re-test after pivots, feature changes, or market shifts | "food chain monitor", "re-battle this" |
+You describe your idea. The God Agent reads it, selects animals matched to your
+specific threat vectors, states its kill hypothesis, and asks how many agents
+you want.
 
-One install gives you the complete adversarial product thinking workflow:
+Then this happens:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROUND 1  ·  5 animals remaining
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🪱 TAPEWORM — Instagram API dependency
+Instagram Graph API rate-limits at 200 calls/hr. TikTok Content Posting API
+requires individual app review with revocable access. Your entire product
+sits on rented land with a landlord who's building the same house.
+Kill Shot: The platform adds your feature and terminates the relationship.
+
+🐦‍⬛ CROW — Timing assumption forensics
+Platform algorithms are independent — TikTok peaks over 72hrs, YouTube Shorts
+over 7 days. Cross-platform "catch the wave" is meaningless. Speed provides
+zero algorithmic advantage on destination platforms.
+Kill Shot: You're selling a stopwatch in a race that isn't timed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🐦‍⬛ Crow consumes 🐢 Tortoise
+Absorbed: authenticity/shadowban concern
+Idea patch: Pivot from "publish automatically" to "draft instantly, creator approves"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Four rounds later, the original "viral content repurposer" was dead. The surviving
+idea — a cross-creator structural intelligence platform — shared almost no DNA with
+what went in. The Crow's final kill: *"Structural intelligence produces convergence.
+Thousands of creators using the same tool produce structurally identical posts.
+The better the product works, the faster it poisons its own signal."*
+
+That insight is not in any critique tool. It emerged because each attacker was
+isolated, role-locked, and forced to find a new angle after each patch.
+
+> Full transcript: [`battles/viral-content-repurposer.md`](battles/viral-content-repurposer.md)
+
+---
+
+## Three outcomes, not one
+
+A tool that only kills ideas is a pessimist. Food Chain produces all three:
+
+| Outcome | What happened |
+|---|---|
+| **Survived** | Developer tool. Early termination applied — attacks couldn't land structural kills. Core thesis held. |
+| **Restructured** | B2B SaaS. ICP corrected from "Indian freelancers" to "newly-registered, enterprise-triggered, 0–2 years compliance history." Distribution rebuilt. Moat found. |
+| **Killed** | Office meal coordinator. The stated ICP overwhelmingly uses contracted caterers. The problem the product solved didn't exist. Redirected to B2B caterer procurement intelligence — a completely different business. |
+
+---
+
+## The animals
+
+52 animals across two libraries. Each has hardcoded behavioral DNA —
+the God Agent selects, never invents.
+
+**🐦‍⬛ Crow** — Forensic. Finds the structural assumption three levels deep
+that everyone overlooked. Quiet, then devastating.
+
+**🪱 Tapeworm** — Lives inside the platform you depend on. Invisible until
+you scale. Then the host adds your feature and terminates the relationship.
+
+**🐢 Tortoise** — Has seen every wave of disruption since 2009.
+Has a spreadsheet that works fine.
+
+**🦈 Shark** — The incumbent with 200k users who can ship your feature
+as a Tuesday sprint toggle.
+
+**🐘 Elephant** — Microsoft/Google adds it to the bundle. Free. Tomorrow.
+
+**🦂 Scorpion** — Compliance. GDPR. SOC 2. The thing you forgot until
+a customer's legal team sends the questionnaire.
+
+32 product animals. 20 code-specific animals. Full libraries in
+[`animal-library.md`](skills/food-chain-ideation/references/animal-library.md) and
+[`code-animal-library.md`](skills/food-chain-code/references/code-animal-library.md).
+
+---
+
+## Four skills, one install
+
+| Skill | Purpose |
+|---|---|
+| **food-chain-ideation** | Stress-test product ideas — 32 animals, elimination rounds, blind scoring |
+| **food-chain-code** | Stress-test architecture decisions before writing code — 20 code animals |
+| **apex-to-action** | Turn battle output into a 90-day execution plan with validation gates |
+| **food-chain-monitor** | Re-test after pivots or market shifts — 3 animals, 2 rounds, fast verdict |
+
 **Stress-test → Execute → Monitor → Re-test.**
 
 ---
 
-## How It Works
+## Why this is different
 
-The God Agent reads your idea and selects adversarial agents from a behavioral
-DNA library — each matched to the specific threat vectors in your problem.
-A Crow is assigned because it finds hidden structural flaws. A Tapeworm because
-your product is built on a platform that can terminate the relationship.
-A Tortoise because the person who needs to adopt this has used a spreadsheet
-for nine years and is not in pain.
+Standard adversarial critique gives you four attacks and a summary.
+You read them, nod, and build the same thing you were going to build.
 
-Each agent attacks under strict role-lock — zero awareness of the other attacks.
-In environments that support it (Claude Code), each animal is spawned as an
-independent subagent with architecturally enforced isolation. In single-context
-environments (Claude.ai, Cursor), role-lock is instruction-enforced with
-automatic fallback.
+Food Chain gives you four attacks where the weakest dies, its insight
+transfers to the winner, the idea patches itself, and the next round's
+agents attack the *patched* version. The attacks compound. The idea evolves.
+The final surviving argument has been pressure-tested by everything the
+ecosystem could generate.
 
-The weakest argument is eliminated. The survivor absorbs its sharpest insight
-and evolves. The idea patches itself. The next round's agents attack the
-patched version.
+**Subagent mode** — In Claude Code, each animal is a separate agent with
+zero shared context. Role-lock is architectural, not instructional.
+A Crow literally cannot see what the Tapeworm said.
 
-One apex predator stands. That is the thing worth building.
+**Blind scoring** — Attacks scored by an independent agent that receives
+them anonymized as "Attacker A", "Attacker B". No animal names.
+No God Agent self-assessment bias.
 
----
+**Pivot engine** — When an idea is killed, three pivots auto-generate from
+the wreckage, each mini-battled and ranked. You don't leave with "don't
+build this." You leave with "build this instead."
 
-## v2.0 — What's New
-
-- **Subagent mode** — true architectural isolation between attackers when Agent tool
-  is available. Each animal is a separate agent with zero shared context.
-- **Blind scoring** — attacks scored by an independent agent with no knowledge of
-  which animal produced which attack. Removes God Agent self-assessment bias.
-- **Subagent evolution** — animals receive one-line patch context in later rounds
-  (no attribution) so they can evolve their angle without breaking role-lock.
-- **Audience agent** — after the battle, a simulation of your actual ICP reacts
-  to the evolved idea. "Would you pay for this?"
-- **Pivot engine** — when an idea is killed, auto-generates 3 pivots from the
-  wreckage, mini-battles each, and recommends the strongest alternative.
-- **Four-skill suite** — food-chain-code, apex-to-action, and food-chain-monitor
-  join the ecosystem.
-
----
-
-## What It Produces
-
-Three validation tests across different domains, no parameter tuning:
-
-**Strong idea (developer tool):** Survived with minor patches. Early termination
-applied. Core thesis held. Unfair advantage identified.
-
-**Restructured idea (B2B SaaS):** ICP corrected from "Indian freelancers" to
-"newly-registered, enterprise-triggered, 0–2 years compliance history."
-Distribution strategy rebuilt. Moat identified.
-
-**Killed idea (consumer marketplace):** Three pivots generated, each attacked
-in the next round. Final recommendation: do not build this business in its
-current form. Redirected to a $50k certification play with no platform dependency.
-
-A tool that only kills ideas is not a stress-tester. It is a pessimist.
-Food Chain produces all three outcomes because that is what honest pressure testing does.
-
-See `battles/` for complete battle transcripts with full round-by-round output.
-
----
-
-## Installation
-
-```
-npx skills add CodedRichy/food-chain-ideation
-```
-
-Or drop the skill files into your Claude environment manually.
-Works in Claude.ai, Claude Code, Cursor, Windsurf, Copilot, and any agent.
-No dependencies. No API calls. No artifact required.
-
-```
-food-chain-ideation/
-├── skills/
-│   ├── food-chain-ideation/
-│   │   ├── SKILL.md                    ← product idea battles
-│   │   └── references/
-│   │       └── animal-library.md       ← 32 animals, behavioral DNA
-│   ├── food-chain-code/
-│   │   ├── SKILL.md                    ← architecture decision battles
-│   │   └── references/
-│   │       └── code-animal-library.md  ← 20 code-specific animals
-│   ├── apex-to-action/
-│   │   └── SKILL.md                    ← battle output → 90-day plan
-│   └── food-chain-monitor/
-│       └── SKILL.md                    ← re-test after changes
-├── battles/                            ← complete battle transcripts
-├── evals/
-│   └── evals.json
-└── CONTRIBUTING.md
-```
+**Audience agent** — After the battle, a simulation of your actual ICP
+reacts to the evolved idea. "Would you pay for this?"
 
 ---
 
 ## Usage
 
 ```
-food chain my idea: [describe your idea]
+food chain my idea: [your idea]
 
-pressure test this: [describe your decision]
+what kills this: [your product]
 
-what kills this: [describe your product]
-
-food chain code: [describe your architecture decision]
+food chain code: [your architecture decision]
 
 apex to action: [paste your battle log]
 
-food chain monitor: [paste battle log + describe what changed]
+food chain monitor: [paste battle log + what changed]
 ```
 
-The God Agent will analyze complexity, recommend an agent count, state its
-kill hypothesis, and wait for your confirmation before the battle begins.
+---
+
+## Install
+
+```
+npx skills add CodedRichy/food-chain-ideation
+```
+
+Works in Claude.ai, Claude Code, Cursor, Windsurf, Copilot.
+No dependencies. No API calls. No configuration.
+
+<details>
+<summary>Repo structure</summary>
+
+```
+skills/
+├── food-chain-ideation/
+│   ├── SKILL.md                    ← product idea battles
+│   └── references/
+│       └── animal-library.md       ← 32 animals, behavioral DNA
+├── food-chain-code/
+│   ├── SKILL.md                    ← architecture decision battles
+│   └── references/
+│       └── code-animal-library.md  ← 20 code-specific animals
+├── apex-to-action/
+│   └── SKILL.md                    ← battle output → 90-day plan
+└── food-chain-monitor/
+    └── SKILL.md                    ← re-test after changes
+```
+
+</details>
 
 ---
 
-## The Animal Libraries
+## Contributing
 
-**Product library** — 32 animals across 8 categories:
-Cunning/Deceptive, Scavenger/Opportunist, Brute Force/Resource,
-Inertia/Friction, Parasite/Dependency, Environmental/Timing,
-Psychological/Social, Highly Specific.
-
-**Code library** — 20 animals across 5 categories:
-Maintenance/Technical Debt, Scale/Performance, Security/Compliance,
-Team/Human, Integration/Boundary.
-
-Each animal has hardcoded behavioral DNA. The God Agent selects —
-never invents personality from scratch. Quick selection guides
-match idea types and architecture decisions to the right animals.
-
-A sample from the product library:
-
-- **🐦‍⬛ Crow** — Forensic. Finds the structural assumption three levels deep
-  that everyone overlooked. Quiet, then devastating.
-- **🪱 Tapeworm** — Lives inside the platform you depend on. Invisible
-  until you scale. Then the host adds your feature and terminates the relationship.
-- **🐢 Tortoise** — Has seen every wave of disruption since 2009.
-  Has a spreadsheet that works fine.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Every new animal added by the
+community makes every existing installation better retroactively.
 
 ---
 
-## Why Not a Standard Adversarial Skill
-
-Every existing adversarial skill targets code review and deployment plans.
-None target the earlier layer — the product decision — where bad assumptions
-compound into wasted months before a line of code is written.
-
-The elimination mechanic is the difference. Standard critique gives you
-four attacks and a summary. Food Chain gives you four attacks where the
-weakest dies, its best insight transfers to the winner, and the winner
-attacks a harder version of your idea in the next round. The final
-surviving argument has been pressure-tested by everything the ecosystem
-could generate. That is not a critique. That is a battle.
-
----
-
-## Changelog
+<details>
+<summary>Changelog</summary>
 
 **v2.0.0**
 - Subagent mode — architecturally enforced role-lock via independent agents
@@ -196,7 +212,6 @@ could generate. That is not a critique. That is a battle.
 - food-chain-code — architecture decision stress-tester with 20 code-specific animals
 - apex-to-action — battle output → 90-day execution plan with validation gates
 - food-chain-monitor — delta re-testing after changes with 3 animals, 2 rounds max
-- Battle gallery added — complete transcripts in battles/
 - Restructured as multi-skill suite — one install, four skills
 
 **v1.3.0**
@@ -209,21 +224,11 @@ could generate. That is not a critique. That is a battle.
 - Pre-flight checks — ecosystem validated before battle starts
 - God Agent hypothesis — kill prediction stated before round 1
 - Early termination rule — strong ideas declared early
-- Environment fallback — automatic cap at 3 agents in degraded contexts
 
 **v1.1.0**
 - Anti-pattern combinations added to animal library
-- Minimum ecosystem requirements defined
 
 **v1.0.0**
 - Initial release — 16 animals, elimination and absorption loop
 
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose new animals,
-submit battle transcripts, and contribute to the libraries.
-
-The animal library is a living document. Every new animal added by the
-community makes every existing installation better retroactively.
+</details>
