@@ -689,11 +689,16 @@
 
   <section class="install-section reveal" id="install">
     <h2 class="install-title">Begin your field work.</h2>
-    <div class="install-note">zero dependencies, one command, works everywhere</div>
+    <div class="install-note">zero dependencies, two commands, works everywhere</div>
     <div class="install-card">
-      <code>npx skills add CodedRichy/food-chain-ideation</code>
+      <code>claude plugin marketplace add CodedRichy/food-chain-ideation</code>
       <button class="install-copy" id="copyBtn" onclick="copyInstall()">Copy</button>
     </div>
+    <div class="install-card" style="margin-top: 0.5rem;">
+      <code>claude plugin install food-chain-ideation@food-chain-ideation</code>
+      <button class="install-copy" onclick="copyInstall2()">Copy</button>
+    </div>
+    <div class="install-note" style="font-size: 0.78rem; margin-top: 0.8rem; opacity: 0.7;">Or manually: <code style="font-size: 0.75rem;">git clone</code> the repo and copy <code style="font-size: 0.75rem;">skills/</code> into <code style="font-size: 0.75rem;">.claude/skills/</code></div>
     <div class="install-envs">
       <span class="env-pill">Claude Code</span>
       <span class="env-pill">Claude.ai</span>
@@ -986,9 +991,13 @@
     document.querySelectorAll('.stat-number').forEach(el => counterObs.observe(el));
 
     function copyInstall() {
-      navigator.clipboard.writeText('npx skills add CodedRichy/food-chain-ideation');
+      navigator.clipboard.writeText('claude plugin marketplace add CodedRichy/food-chain-ideation');
       const b = document.getElementById('copyBtn');
       b.textContent = 'Copied!'; setTimeout(() => b.textContent = 'Copy', 1500);
+    }
+    function copyInstall2() {
+      navigator.clipboard.writeText('claude plugin install food-chain-ideation@food-chain-ideation');
+      event.target.textContent = 'Copied!'; setTimeout(() => event.target.textContent = 'Copy', 1500);
     }
 
     setTimeout(playHero, 600);

@@ -14,7 +14,8 @@ a harder version of your idea. One apex predator remains.
 That is the thing worth building.
 
 ```
-npx skills add CodedRichy/food-chain-ideation
+claude plugin marketplace add CodedRichy/food-chain-ideation
+claude plugin install food-chain-ideation@food-chain-ideation
 ```
 
 ---
@@ -163,24 +164,28 @@ food chain monitor: [paste battle log + what changed]
 
 ## Install
 
-**Via skills CLI (recommended):**
+**Via Claude Code plugin system (recommended):**
 
 ```
-npx skills add CodedRichy/food-chain-ideation
+claude plugin marketplace add CodedRichy/food-chain-ideation
+claude plugin install food-chain-ideation@food-chain-ideation
 ```
 
-**Manual install (any environment):**
+**Manual install:**
 
 ```bash
 git clone https://github.com/CodedRichy/food-chain-ideation.git
-cp -r food-chain-ideation/skills your-project/skills/
+# Project-level (this project only):
+cp -r food-chain-ideation/skills .claude/skills
+# Or global (all projects):
+cp -r food-chain-ideation/skills ~/.claude/skills
 ```
 
-Or just copy the `skills/` folder into your project root. The skill files are
-self-contained markdown — no build step, no config, no dependencies.
+On Windows, `~/.claude/` is `C:\Users\<you>\.claude\`.
+
+Self-contained markdown — no build step, no config, no dependencies.
 
 Works in Claude.ai, Claude Code, Cursor, Windsurf, Copilot.
-No dependencies. No API calls. No configuration.
 
 <details>
 <summary>Repo structure</summary>
