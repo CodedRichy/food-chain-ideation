@@ -173,7 +173,7 @@ npx skills add CodedRichy/food-chain-ideation
 
 ```bash
 git clone https://github.com/CodedRichy/food-chain-ideation.git
-cp -r food-chain-ideation/skills/ your-project/skills/
+cp -r food-chain-ideation/skills your-project/skills/
 ```
 
 Or just copy the `skills/` folder into your project root. The skill files are
