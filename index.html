@@ -192,22 +192,22 @@
 
     /* ═══ Sections ═══ */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-    .section { padding: 5rem 0; position: relative; }
+    .section { padding: 6rem 0; position: relative; }
     .section-title {
       font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 900; margin-bottom: 0.5rem; color: var(--text);
+      font-weight: 900; margin-bottom: 0.75rem; color: var(--text);
     }
     .section-subtitle {
       color: var(--text-dim); font-size: 1.05rem;
-      margin-bottom: 3rem; max-width: 500px;
+      margin-bottom: 3.5rem; max-width: 500px;
     }
     .section-note {
       font-family: var(--hand); font-size: 1.65rem; color: var(--green-mid);
-      transform: rotate(-1deg); display: inline-block; margin-bottom: 3rem;
+      transform: rotate(-1deg); display: inline-block; margin-bottom: 3.5rem;
     }
     .divider {
       display: flex; align-items: center; gap: 1rem;
-      padding: 1rem 2rem; max-width: 1100px; margin: 0 auto;
+      padding: 2rem 2rem; max-width: 1100px; margin: 0 auto;
     }
     .divider::before, .divider::after {
       content: ''; flex: 1; height: 1px; background: var(--border);
@@ -254,7 +254,7 @@
     .step-arrow { color: var(--border); font-size: 1.3rem; display: flex; align-items: center; padding-top: 1.5rem; }
 
     /* ═══ Outcomes ═══ */
-    .outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .outcome-card {
       padding: 1.75rem; border-radius: 2px;
       border: 1px solid var(--border); background: var(--bg-white);
@@ -290,7 +290,7 @@
     }
     .filter-btn:hover { border-color: var(--green-mid); color: var(--green); }
     .filter-btn.active { background: var(--green-tag-bg); border-color: var(--green-mid); color: var(--green); }
-    .animal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .animal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
     .animal-card {
       background: var(--bg-white); border: 1px solid var(--border);
       border-radius: 2px; padding: 1.5rem; transition: all 0.3s; cursor: default; position: relative;
@@ -325,7 +325,7 @@
     .animal-detail-line strong { color: var(--text); font-weight: 600; }
 
     /* ═══ Battles ═══ */
-    .battle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .battle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
     .battle-card {
       background: var(--bg-white); border: 1px solid var(--border);
       border-radius: 2px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;
@@ -365,10 +365,10 @@
     .demo-hint { font-family: var(--hand); font-size: 1.35rem; color: var(--text-muted); margin-top: 0.75rem; }
 
     /* ═══ Skills ═══ */
-    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
     .skill-card {
       background: var(--bg-white); border: 1px solid var(--border);
-      border-radius: 2px; padding: 1.75rem; transition: all 0.3s; position: relative; overflow: hidden;
+      border-radius: 2px; padding: 2rem 1.75rem; transition: all 0.3s; position: relative; overflow: hidden;
     }
     .skill-card:hover { box-shadow: 2px 4px 16px rgba(0,0,0,0.06); }
     .skill-num {
@@ -387,7 +387,7 @@
     .skill-trigger code { color: var(--green-mid); }
 
     /* ═══ Install ═══ */
-    .install-section { text-align: center; padding: 5rem 2rem; position: relative; }
+    .install-section { text-align: center; padding: 6rem 2rem 5rem; position: relative; }
     .install-title {
       font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.8rem);
       font-weight: 900; margin-bottom: 1.25rem; color: var(--text);
@@ -399,7 +399,7 @@
     .install-card {
       display: inline-flex; align-items: center; gap: 1rem;
       background: var(--bg-white); border: 1px solid var(--border);
-      border-radius: 2px; padding: 0.9rem 1.4rem; margin-bottom: 1.75rem;
+      border-radius: 2px; padding: 0.9rem 1.4rem; margin-bottom: 2rem;
       box-shadow: 1px 2px 8px rgba(0,0,0,0.04);
     }
     .install-card code { font-family: var(--mono); font-size: 0.88rem; color: var(--green); }
@@ -409,18 +409,18 @@
       font-family: var(--mono); font-size: 0.72rem; cursor: pointer; transition: all 0.3s;
     }
     .install-copy:hover { background: rgba(45, 80, 22, 0.12); }
-    .install-envs { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+    .install-envs { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
     .env-pill {
       font-family: var(--body); font-size: 0.75rem; font-style: italic;
       color: var(--text-dim); border: 1px solid var(--border);
       padding: 0.25rem 0.65rem; border-radius: 2px; background: var(--bg-paper);
     }
     .roadmap {
-      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;
     }
     .roadmap-item {
       background: var(--bg-paper); border: 1px dashed var(--border);
-      border-radius: 2px; padding: 0.65rem 1.1rem; opacity: 0.55;
+      border-radius: 2px; padding: 1rem 1.5rem; opacity: 0.55;
     }
     .roadmap-item .skill-name { margin-bottom: 0.15rem; }
     .roadmap-item p { font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
@@ -429,7 +429,7 @@
     }
 
     /* ═══ Footer ═══ */
-    .footer { border-top: 1px solid var(--border); padding: 2rem 2rem; }
+    .footer { border-top: 1px solid var(--border); padding: 3rem 2rem; margin-top: 0; }
     .footer-inner {
       max-width: 1100px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
@@ -694,11 +694,11 @@
       <code>claude plugin marketplace add CodedRichy/food-chain-ideation</code>
       <button class="install-copy" id="copyBtn" onclick="copyInstall()">Copy</button>
     </div>
-    <div class="install-card" style="margin-top: 0.5rem;">
+    <div class="install-card" style="margin-top: 0.75rem;">
       <code>claude plugin install food-chain-ideation@food-chain-ideation</code>
       <button class="install-copy" onclick="copyInstall2()">Copy</button>
     </div>
-    <div class="install-note" style="font-size: 0.78rem; margin-top: 0.8rem; opacity: 0.7;">Or manually: <code style="font-size: 0.75rem;">git clone</code> the repo and copy <code style="font-size: 0.75rem;">skills/</code> into <code style="font-size: 0.75rem;">.claude/skills/</code></div>
+    <div class="install-note" style="font-size: 0.9rem; margin-top: 1.2rem; margin-bottom: 0; opacity: 0.7;">Or manually: <code style="font-size: 0.82rem;">git clone</code> the repo and copy <code style="font-size: 0.82rem;">skills/</code> into <code style="font-size: 0.82rem;">.claude/skills/</code></div>
     <div class="install-envs">
       <span class="env-pill">Claude Code</span>
       <span class="env-pill">Claude.ai</span>
