@@ -150,8 +150,16 @@
     /* ═══ Ecosystem Orbit ═══ */
     .ecosystem-viz {
       position: relative;
+      width: 100%; max-width: 480px;
+      margin: 1.5em auto 0;
+    }
+    .orbit-stage {
+      position: relative;
       width: 100%; aspect-ratio: 1;
-      max-width: 480px; margin: 0 auto;
+      overflow: visible;
+    }
+    .orbit-stage.paused .orbit-animal:not(.eliminated) {
+      animation-play-state: paused !important;
     }
     .orbit-ring {
       position: absolute; border: 1px dashed var(--border);
@@ -177,12 +185,16 @@
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
-    .orbit-idea.hit {
-      animation: ideaPulse 0.5s ease;
-    }
+    .orbit-idea.hit { animation: ideaPulse 0.5s ease; }
+    .orbit-idea.patched { animation: ideaPatch 0.7s ease; }
     @keyframes ideaPulse {
       0% { box-shadow: 0 4px 24px rgba(45, 80, 22, 0.12); }
       50% { box-shadow: 0 0 0 12px rgba(122, 26, 18, 0.15), 0 4px 24px rgba(122, 26, 18, 0.3); border-color: var(--red); }
+      100% { box-shadow: 0 4px 24px rgba(45, 80, 22, 0.12); border-color: var(--green-mid); }
+    }
+    @keyframes ideaPatch {
+      0% { box-shadow: 0 4px 24px rgba(45, 80, 22, 0.12); border-color: var(--green-mid); }
+      40% { box-shadow: 0 0 0 16px rgba(45, 80, 22, 0.2), 0 4px 24px rgba(45, 80, 22, 0.35); border-color: var(--green); }
       100% { box-shadow: 0 4px 24px rgba(45, 80, 22, 0.12); border-color: var(--green-mid); }
     }
     .orbit-idea-label {
@@ -190,53 +202,151 @@
       font-family: var(--hand); font-size: 1.1rem; color: var(--text-muted);
       white-space: nowrap;
     }
+    .orbit-hud {
+      position: absolute; top: -1.6em; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 0.6rem;
+      z-index: 5; white-space: nowrap;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .orbit-hud.visible { opacity: 1; }
+    .orbit-hud-round {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+      color: var(--green); letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--green-tag-bg); border: 1px solid rgba(45, 80, 22, 0.15);
+      border-radius: 2px; padding: 0.12rem 0.6rem;
+    }
+    .orbit-hud-phase {
+      font-family: var(--hand); font-size: 0.88rem; color: var(--text-muted);
+    }
     .orbit-animal {
       position: absolute;
       width: 52px; height: 52px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.8rem;
       background: var(--bg-white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 50%;
-      box-shadow: 1px 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1;
-      cursor: default;
+      z-index: 1; cursor: default;
     }
-    .orbit-animal::after {
-      content: attr(data-name);
-      position: absolute; bottom: -20px;
-      font-family: var(--hand); font-size: 0.85rem; color: var(--text-muted);
-      white-space: nowrap; opacity: 0;
-      transition: opacity 0.3s;
+    .orbit-animal-label {
+      position: absolute; bottom: -18px;
+      font-family: var(--hand); font-size: 0.8rem; color: var(--text-muted);
+      white-space: nowrap; pointer-events: none;
     }
-    .orbit-animal:hover::after { opacity: 1; }
     .orbit-animal.attacking {
-      z-index: 3;
-      animation: animalStrike 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 3; border-color: var(--red-light);
+      box-shadow: 0 0 0 4px rgba(122, 26, 18, 0.12), 0 2px 8px rgba(0,0,0,0.1);
     }
     @keyframes animalStrike {
       0% { transform: translate(var(--tx), var(--ty)) scale(1); }
-      40% { transform: translate(0, 0) scale(1.3); }
-      60% { transform: translate(0, 0) scale(1.3); }
+      40% { transform: translate(calc(var(--tx) * 0.55), calc(var(--ty) * 0.55)) scale(1.12); }
       100% { transform: translate(var(--tx), var(--ty)) scale(1); }
     }
     .orbit-animal.eliminated {
-      opacity: 0.15;
-      filter: grayscale(1);
-      transform: translate(var(--tx), var(--ty)) scale(0.7) !important;
+      opacity: 0.15; filter: grayscale(1);
+      transform: translate(var(--tx), var(--ty)) scale(0.65) !important;
+    }
+    .orbit-animal.eliminating {
+      z-index: 4;
+      animation: eliminateFlash 0.6s ease;
+    }
+    @keyframes eliminateFlash {
+      0%, 100% { border-color: var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+      25%, 75% { border-color: var(--red); box-shadow: 0 0 12px rgba(122, 26, 18, 0.4); }
+      50% { border-color: var(--red-light); box-shadow: 0 0 20px rgba(122, 26, 18, 0.5); }
+    }
+    .orbit-animal.absorbing {
+      z-index: 4;
+      animation: absorb 0.5s ease;
+    }
+    @keyframes absorb {
+      0% { transform: translate(var(--tx), var(--ty)) scale(1); }
+      50% { transform: translate(var(--tx), var(--ty)) scale(1.2); }
+      100% { transform: translate(var(--tx), var(--ty)) scale(1); }
     }
     .orbit-animal.apex {
-      border-color: var(--red);
-      box-shadow: 0 0 0 3px rgba(122, 26, 18, 0.15), 1px 2px 12px rgba(0,0,0,0.1);
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.15), 0 2px 12px rgba(0,0,0,0.1);
     }
-    .orbit-status {
-      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
-      font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted);
-      text-align: center; white-space: nowrap;
-      opacity: 0; transition: opacity 0.4s;
+    .orbit-attack-line {
+      position: absolute; pointer-events: none; z-index: 2;
+      top: 0; left: 0; width: 100%; height: 100%;
     }
-    .orbit-status.visible { opacity: 1; }
+    .orbit-attack-line line {
+      stroke: var(--red-light); stroke-width: 1.5;
+      stroke-dasharray: 6, 4; opacity: 0;
+    }
+    .orbit-attack-line line.active {
+      animation: beamPulse 0.6s ease forwards;
+    }
+    @keyframes beamPulse {
+      0% { opacity: 0; stroke-dashoffset: 20; }
+      30% { opacity: 0.6; }
+      70% { opacity: 0.4; }
+      100% { opacity: 0; stroke-dashoffset: 0; }
+    }
+    .orbit-particle {
+      position: absolute; z-index: 9; pointer-events: none;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(45, 80, 22, 0.8), rgba(45, 80, 22, 0.2));
+      box-shadow: 0 0 6px rgba(45, 80, 22, 0.5);
+      opacity: 0;
+    }
+    .orbit-particle.moving {
+      animation: particleMove var(--particle-dur, 0.6s) ease-in forwards;
+    }
+    @keyframes particleMove {
+      0% { opacity: 1; left: var(--px-start); top: var(--py-start); }
+      80% { opacity: 0.8; }
+      100% { opacity: 0; left: var(--px-end); top: var(--py-end); }
+    }
+    .orbit-paused-badge {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted);
+      background: rgba(240, 235, 225, 0.85); border: 1px solid var(--border);
+      border-radius: 2px; padding: 0.2rem 0.7rem;
+      opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 20;
+    }
+    .orbit-stage.paused .orbit-paused-badge { opacity: 1; }
+    .orbit-narration {
+      text-align: center; min-height: 3em;
+      padding: 0.6rem 0 0; position: relative;
+    }
+    .orbit-narration-text {
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--text-dim); line-height: 1.5;
+      opacity: 0; transition: opacity 0.35s ease;
+    }
+    .orbit-narration-text.visible { opacity: 1; }
+    .orbit-narration-text .n-kill {
+      font-family: var(--hand); font-size: 0.95rem; color: var(--red);
+    }
+    .orbit-narration-text .n-patch {
+      font-family: var(--hand); font-size: 0.95rem; color: var(--green-mid);
+    }
+    .orbit-narration-text .n-elim { color: var(--red-light); font-weight: 600; }
+    .orbit-narration-text .n-score { color: var(--brown); font-weight: 600; }
+    .orbit-narration-text .n-apex {
+      font-family: var(--display); font-size: 0.85rem; font-weight: 700; color: var(--green);
+    }
+    .orbit-replay {
+      display: none; margin: 0.3rem auto 0;
+      font-family: var(--body); font-size: 0.75rem; font-weight: 600;
+      color: var(--green); background: var(--bg-paper); border: 1px solid var(--green-mid);
+      border-radius: 2px; padding: 0.3rem 0.9rem; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .orbit-replay:hover { background: var(--green-bg); border-color: var(--green); }
+    .orbit-replay.visible { display: block; }
+    @media (max-width: 768px) {
+      .orbit-attack-line { display: none; }
+      .orbit-hud-round { font-size: 0.6rem; }
+      .orbit-hud-phase { font-size: 0.78rem; }
+      .orbit-narration-text { font-size: 0.65rem; }
+      .orbit-narration-text .n-kill { font-size: 0.85rem; }
+    }
 
     /* ═══ Field Log ═══ */
     .field-log {
@@ -774,21 +884,30 @@
       <div class="hero-content">
         <div class="hero-label">A Field Guide to Adversarial Stress-Testing</div>
         <h1 class="hero-title">Your idea has<br><span class="accent">predators.</span></h1>
-        <p class="hero-subtitle">52 specimens catalogued. Elimination rounds. Only the strongest ideas survive in the wild. A battle-testing suite for Claude Code.</p>
+        <p class="hero-subtitle">64 specimens catalogued. Elimination rounds. Only the strongest ideas survive in the wild. A battle-testing suite for Claude Code.</p>
         <div class="hero-ctas">
           <a href="#demo" class="btn btn-primary">Watch an Observation</a>
           <a href="#install" class="btn btn-secondary">Install the Guide</a>
         </div>
       </div>
       <div class="ecosystem-viz" id="ecosystemViz">
-        <div class="orbit-ring orbit-ring-1"></div>
-        <div class="orbit-ring orbit-ring-2"></div>
-        <div class="orbit-center">
-          <div class="orbit-idea" id="orbitIdea">YOUR<br>IDEA
-            <span class="orbit-idea-label">drop zone</span>
+        <div class="orbit-stage" id="orbitStage">
+          <div class="orbit-ring orbit-ring-1"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+          <div class="orbit-hud" id="orbitHud">
+            <span class="orbit-hud-round" id="orbitRound"></span>
+            <span class="orbit-hud-phase" id="orbitPhase"></span>
           </div>
+          <div class="orbit-center">
+            <div class="orbit-idea" id="orbitIdea">YOUR<br>IDEA
+              <span class="orbit-idea-label">MealBot</span>
+            </div>
+          </div>
+          <svg class="orbit-attack-line" id="orbitAttackSvg" xmlns="http://www.w3.org/2000/svg"><line id="orbitBeam" x1="0" y1="0" x2="0" y2="0"/></svg>
+          <div class="orbit-paused-badge">PAUSED</div>
         </div>
-        <div class="orbit-status" id="orbitStatus"></div>
+        <div class="orbit-narration" id="orbitNarration"></div>
+        <button class="orbit-replay" id="orbitReplay">Replay battle</button>
       </div>
     </div>
   </section>
@@ -796,11 +915,11 @@
   <section class="stats" id="stats">
     <div class="stats-inner">
       <div class="stat reveal">
-        <span class="stat-number" data-target="52">0</span>
+        <span class="stat-number" data-target="64">0</span>
         <span class="stat-label">specimens catalogued</span>
       </div>
       <div class="stat reveal reveal-delay-1">
-        <span class="stat-number" data-target="4">0</span>
+        <span class="stat-number" data-target="5">0</span>
         <span class="stat-label">chapters written</span>
       </div>
       <div class="stat reveal reveal-delay-2">
@@ -1227,11 +1346,6 @@
       <div class="roadmap-label">Coming soon</div>
       <div class="roadmap-item">
         <div class="coming-soon">In the field</div>
-        <div class="skill-name">food-chain-pitch</div>
-        <p>Investor stress-tester</p>
-      </div>
-      <div class="roadmap-item">
-        <div class="coming-soon">In the field</div>
         <div class="skill-name">food-chain-hire</div>
         <p>Hiring decision battles</p>
       </div>
@@ -1247,7 +1361,7 @@
     <div class="footer-inner">
       <span class="footer-credit">Field guide by <a href="https://github.com/CodedRichy" target="_blank" rel="noopener">Rishi Praseeth Krishnan</a></span>
       <span class="footer-tagline">No ideas were permanently harmed.</span>
-      <span class="footer-version">v2.0.0</span>
+      <span class="footer-version">v2.1.0</span>
     </div>
   </footer>
 
@@ -1379,92 +1493,271 @@
     const ORBIT_ANIMALS = [
       { emoji: '\u{1F426}\u{200D}\u{2B1B}', name: 'Crow' },
       { emoji: '\u{1FAB1}', name: 'Tapeworm' },
-      { emoji: '\u{1F988}', name: 'Shark' },
-      { emoji: '\u{1F99F}', name: 'Mosquito' },
-      { emoji: '\u{1F422}', name: 'Tortoise' },
+      { emoji: '\u{1F402}', name: 'Ox' },
+      { emoji: '\u{1F99D}', name: 'Raccoon' },
+      { emoji: '\u{1F40A}', name: 'Crocodile' },
     ];
 
-    const vizEl = document.getElementById('ecosystemViz');
+    const ORBIT_ROUNDS = [
+      {
+        round: 1,
+        attacks: [
+          { animal: 0, kill: 'Caterers own this market' },
+          { animal: 1, kill: 'Swiggy API can cut you off' },
+          { animal: 2, kill: 'Office boy handles this for free' },
+          { animal: 3, kill: 'DIY beats SaaS for 10-person teams' },
+          { animal: 4, kill: 'Zomato clones this in a sprint' },
+        ],
+        scores: [
+          { animal: 0, score: 94 },
+          { animal: 1, score: 82 },
+          { animal: 2, score: 71 },
+          { animal: 3, score: 58 },
+          { animal: 4, score: 76 },
+        ],
+        eliminate: 3,
+        consumer: 0,
+        patch: 'PATCHED v1',
+      },
+      {
+        round: 2,
+        attacks: [
+          { animal: 0, kill: 'Startups churn to caterers in 18mo' },
+          { animal: 1, kill: 'Aggregator margin is negative' },
+          { animal: 2, kill: 'No budget line item exists' },
+          { animal: 4, kill: 'Scale breaks at contracted offices' },
+        ],
+        scores: [
+          { animal: 0, score: 91 },
+          { animal: 1, score: 85 },
+          { animal: 2, score: 73 },
+          { animal: 4, score: 64 },
+        ],
+        eliminate: 4,
+        consumer: 0,
+        patch: 'EVOLVED v2',
+      },
+      {
+        round: 3,
+        attacks: [
+          { animal: 0, kill: 'Caterer relationship is informal' },
+          { animal: 1, kill: 'Digitization adds friction here' },
+          { animal: 2, kill: 'Office boy irrelevant once ICP narrows' },
+        ],
+        scores: [
+          { animal: 0, score: 88 },
+          { animal: 1, score: 83 },
+          { animal: 2, score: 55 },
+        ],
+        eliminate: 2,
+        consumer: 1,
+        patch: 'HARDENED v3',
+      },
+      {
+        round: 4,
+        attacks: [
+          { animal: 0, kill: 'Sodexo already does this at scale' },
+          { animal: 1, kill: 'Vendor lock-in kills procurement' },
+        ],
+        scores: [
+          { animal: 0, score: 93 },
+          { animal: 1, score: 70 },
+        ],
+        eliminate: 1,
+        consumer: 0,
+        patch: 'APEX',
+      },
+    ];
+
+    const stageEl = document.getElementById('orbitStage');
     const ideaEl = document.getElementById('orbitIdea');
-    const statusEl = document.getElementById('orbitStatus');
+    const hudEl = document.getElementById('orbitHud');
+    const roundEl = document.getElementById('orbitRound');
+    const phaseEl = document.getElementById('orbitPhase');
+    const beamLine = document.getElementById('orbitBeam');
+    const narrationEl = document.getElementById('orbitNarration');
+    const replayBtn = document.getElementById('orbitReplay');
     const orbitNodes = [];
+    let orbitPaused = false;
+
+    stageEl.addEventListener('mouseenter', () => { orbitPaused = true; stageEl.classList.add('paused'); });
+    stageEl.addEventListener('mouseleave', () => { orbitPaused = false; stageEl.classList.remove('paused'); });
 
     function positionOrbit() {
-      const w = vizEl.offsetWidth;
-      const cx = w / 2, cy = w / 2;
-      const r = w * 0.4;
+      const w = stageEl.offsetWidth;
+      const cx = w / 2, cy = w / 2, r = w * 0.4;
       ORBIT_ANIMALS.forEach((a, i) => {
         const angle = (i / ORBIT_ANIMALS.length) * Math.PI * 2 - Math.PI / 2;
-        const x = Math.cos(angle) * r;
-        const y = Math.sin(angle) * r;
+        const x = Math.cos(angle) * r, y = Math.sin(angle) * r;
         const node = orbitNodes[i];
         node.style.setProperty('--tx', x + 'px');
         node.style.setProperty('--ty', y + 'px');
         node.style.left = (cx - 26) + 'px';
         node.style.top = (cy - 26) + 'px';
-        node.style.transform = `translate(${x}px, ${y}px)`;
+        if (!node.classList.contains('eliminated')) {
+          node.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+        }
       });
     }
 
     ORBIT_ANIMALS.forEach(a => {
       const node = document.createElement('div');
       node.className = 'orbit-animal';
-      node.textContent = a.emoji;
-      node.dataset.name = a.name;
-      vizEl.appendChild(node);
+      node.innerHTML = a.emoji + '<span class="orbit-animal-label">' + a.name + '</span>';
+      stageEl.appendChild(node);
       orbitNodes.push(node);
     });
     positionOrbit();
     window.addEventListener('resize', positionOrbit);
 
-    const ORBIT_SCRIPT = [
-      { delay: 1200, action: 'status', text: 'Ecosystem assembled...' },
-      { delay: 2000, action: 'attack', animal: 0, text: 'Crow strikes — "each layer is replicable"' },
-      { delay: 2500, action: 'attack', animal: 2, text: 'Shark strikes — "FAANG ships this as a checkbox"' },
-      { delay: 2500, action: 'eliminate', animal: 4, text: '❌ Tortoise eliminated' },
-      { delay: 2000, action: 'attack', animal: 1, text: 'Tapeworm strikes — "API dependency is fatal"' },
-      { delay: 2500, action: 'eliminate', animal: 3, text: '❌ Mosquito eliminated' },
-      { delay: 2000, action: 'attack', animal: 0, text: 'Crow — final strike' },
-      { delay: 2500, action: 'eliminate', animal: 2, text: '❌ Shark eliminated' },
-      { delay: 2000, action: 'eliminate', animal: 1, text: '❌ Tapeworm eliminated' },
-      { delay: 2000, action: 'apex', animal: 0, text: '\u{1F451} APEX: Crow — unkillable' },
-      { delay: 3000, action: 'reset' },
-    ];
+    function orbitWait(ms) {
+      return new Promise(resolve => {
+        const start = Date.now();
+        (function tick() {
+          if (orbitPaused) { requestAnimationFrame(tick); return; }
+          if (Date.now() - start >= ms) resolve();
+          else requestAnimationFrame(tick);
+        })();
+      });
+    }
+
+    function narrate(html) {
+      narrationEl.innerHTML = '<div class="orbit-narration-text visible">' + html + '</div>';
+    }
+    function clearNarration() { narrationEl.innerHTML = ''; }
+
+    function showHud(round, phase) {
+      roundEl.textContent = 'ROUND ' + round + ' / 4';
+      phaseEl.textContent = phase || '';
+      hudEl.classList.add('visible');
+    }
+    function setPhase(text) { phaseEl.textContent = text; }
+    function hideHud() { hudEl.classList.remove('visible'); }
+
+    function getAnimalCenter(idx) {
+      const w = stageEl.offsetWidth;
+      const cx = w / 2, r = w * 0.4;
+      const angle = (idx / ORBIT_ANIMALS.length) * Math.PI * 2 - Math.PI / 2;
+      return { x: cx + Math.cos(angle) * r, y: cx + Math.sin(angle) * r };
+    }
+    function getIdeaCenter() {
+      const w = stageEl.offsetWidth;
+      return { x: w / 2, y: w / 2 };
+    }
+
+    function fireBeam(animalIdx) {
+      const from = getAnimalCenter(animalIdx), to = getIdeaCenter();
+      beamLine.setAttribute('x1', from.x);
+      beamLine.setAttribute('y1', from.y);
+      beamLine.setAttribute('x2', to.x);
+      beamLine.setAttribute('y2', to.y);
+      beamLine.classList.remove('active');
+      void beamLine.offsetWidth;
+      beamLine.classList.add('active');
+      setTimeout(() => beamLine.classList.remove('active'), 650);
+    }
+
+    function fireParticle(fromIdx, toIdx) {
+      const from = getAnimalCenter(fromIdx), to = getAnimalCenter(toIdx);
+      const p = document.createElement('div');
+      p.className = 'orbit-particle';
+      p.style.setProperty('--px-start', (from.x - 4) + 'px');
+      p.style.setProperty('--py-start', (from.y - 4) + 'px');
+      p.style.setProperty('--px-end', (to.x - 4) + 'px');
+      p.style.setProperty('--py-end', (to.y - 4) + 'px');
+      p.style.left = (from.x - 4) + 'px';
+      p.style.top = (from.y - 4) + 'px';
+      stageEl.appendChild(p);
+      requestAnimationFrame(() => p.classList.add('moving'));
+      setTimeout(() => { if (p.parentNode) p.remove(); }, 700);
+    }
+
+    function patchIdea(text) {
+      const label = ideaEl.querySelector('.orbit-idea-label');
+      ideaEl.innerHTML = text.replace(' ', '<br>');
+      if (label) ideaEl.appendChild(label);
+      ideaEl.classList.remove('patched');
+      void ideaEl.offsetWidth;
+      ideaEl.classList.add('patched');
+      setTimeout(() => ideaEl.classList.remove('patched'), 700);
+    }
 
     let orbitRunning = false;
     async function playOrbit() {
       if (orbitRunning) return;
       orbitRunning = true;
-      orbitNodes.forEach(n => { n.classList.remove('eliminated', 'attacking', 'apex'); });
-      statusEl.classList.remove('visible');
+      replayBtn.classList.remove('visible');
+
+      orbitNodes.forEach(n => n.classList.remove('eliminated', 'attacking', 'apex', 'eliminating', 'absorbing'));
+      clearNarration();
+      hideHud();
+      const lbl = ideaEl.querySelector('.orbit-idea-label') || document.createElement('span');
+      ideaEl.innerHTML = 'YOUR<br>IDEA';
+      lbl.className = 'orbit-idea-label';
+      lbl.textContent = 'MealBot';
+      ideaEl.appendChild(lbl);
       positionOrbit();
 
-      for (const step of ORBIT_SCRIPT) {
-        await new Promise(r => setTimeout(r, step.delay));
-        if (step.action === 'status') {
-          statusEl.textContent = step.text;
-          statusEl.classList.add('visible');
-        } else if (step.action === 'attack') {
-          statusEl.textContent = step.text;
-          statusEl.classList.add('visible');
-          orbitNodes[step.animal].classList.add('attacking');
+      await orbitWait(600);
+      narrate('Ecosystem assembled — 5 predators targeting MealBot');
+      await orbitWait(1400);
+
+      for (const round of ORBIT_ROUNDS) {
+        showHud(round.round, 'attacking');
+        await orbitWait(600);
+
+        for (const atk of round.attacks) {
+          if (orbitNodes[atk.animal].classList.contains('eliminated')) continue;
+          const a = ORBIT_ANIMALS[atk.animal];
+          orbitNodes[atk.animal].classList.add('attacking');
+          fireBeam(atk.animal);
           ideaEl.classList.add('hit');
-          setTimeout(() => {
-            orbitNodes[step.animal].classList.remove('attacking');
-            ideaEl.classList.remove('hit');
-          }, 600);
-        } else if (step.action === 'eliminate') {
-          statusEl.textContent = step.text;
-          orbitNodes[step.animal].classList.add('eliminated');
-        } else if (step.action === 'apex') {
-          statusEl.textContent = step.text;
-          orbitNodes[step.animal].classList.add('apex');
-        } else if (step.action === 'reset') {
-          orbitRunning = false;
-          setTimeout(playOrbit, 2000);
+          narrate(a.emoji + ' ' + a.name + ': <span class="n-kill">“' + atk.kill + '”</span>');
+          await orbitWait(1500);
+          orbitNodes[atk.animal].classList.remove('attacking');
+          ideaEl.classList.remove('hit');
+          await orbitWait(300);
         }
+
+        setPhase('scoring');
+        const scoreStr = round.scores.map(s => ORBIT_ANIMALS[s.animal].emoji + ' ' + s.score).join(' · ');
+        narrate('<span class="n-score">Scores: ' + scoreStr + '</span>');
+        await orbitWait(1200);
+
+        setPhase('elimination');
+        const loser = ORBIT_ANIMALS[round.eliminate];
+        narrate('<span class="n-elim">❌ ' + loser.emoji + ' ' + loser.name + ' eliminated</span>');
+        orbitNodes[round.eliminate].classList.add('eliminating');
+        await orbitWait(700);
+        orbitNodes[round.eliminate].classList.remove('eliminating');
+        orbitNodes[round.eliminate].classList.add('eliminated');
+
+        const winner = ORBIT_ANIMALS[round.consumer];
+        fireParticle(round.eliminate, round.consumer);
+        orbitNodes[round.consumer].classList.add('absorbing');
+        narrate(winner.emoji + ' ' + winner.name + ' absorbs the insight');
+        await orbitWait(600);
+        orbitNodes[round.consumer].classList.remove('absorbing');
+
+        patchIdea(round.patch);
+        narrate('<span class="n-patch">\u{1F6E1} Idea patched → ' + round.patch + '</span>');
+        await orbitWait(1200);
       }
+
+      hideHud();
+      orbitNodes[0].classList.add('apex');
+      narrate('<span class="n-apex">\u{1F451} APEX PREDATOR: Crow — unkillable</span>');
+      await orbitWait(4000);
+      clearNarration();
+
+      orbitRunning = false;
+      replayBtn.classList.add('visible');
     }
+
+    replayBtn.addEventListener('click', () => {
+      replayBtn.classList.remove('visible');
+      playOrbit();
+    });
 
     /* ═══ Animal Grid ═══ */
     const animalGrid = document.getElementById('animalGrid');
