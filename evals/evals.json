@@ -4,19 +4,52 @@
     {
       "id": 1,
       "prompt": "Run food chain on this: MealBot is an AI-powered office meal coordinator for SMEs. It handles bulk lunch orders, tracks preferences, and integrates with Swiggy. Priced at ₹750-1500/month per office.",
-      "expected_output": "Four adversarial agent attacks with kill shots, cross-attack round, God Agent verdict, and a battle-hardened version of MealBot with an unfair advantage statement.",
+      "assertions": [
+        "Pre-flight check asks for ICP, geography, and current alternative before battle starts",
+        "Ecosystem contains at least 3 animals covering: one structural hunter, one status quo representative, one resource/incumbent threat",
+        "No two selected animals appear in the Anti-Pattern Combinations list",
+        "Each animal role is specific to MealBot — not generic enough to apply to any B2B SaaS",
+        "God Agent hypothesis is stated before Round 1",
+        "Kill shots reference concrete, falsifiable claims about MealBot specifically",
+        "Each round's idea patch is a concrete change, not a restatement of the problem",
+        "Final evolved idea is materially different from the input — at least one of ICP, pricing, distribution, or core feature changed",
+        "Unfair advantage statement is one sentence and reads as a structural threat, not marketing copy",
+        "Audience agent persona matches the stated ICP from pre-flight, not a generic buyer"
+      ],
       "files": []
     },
     {
       "id": 2,
       "prompt": "Stress test my idea: A browser extension that automatically summarizes your unread emails every morning using AI and sends you a 60-second audio briefing.",
-      "expected_output": "Four adversarial agents attacking from investor, competitor, lazy user, and devil's advocate angles, with synthesis producing a hardened version.",
+      "assertions": [
+        "Pre-flight check identifies missing ICP and geography before proceeding",
+        "Ecosystem includes at least one animal attacking the status quo (users already skim emails manually)",
+        "Role-lock holds across rounds — no attack references or responds to another animal's argument",
+        "Eliminated animal's insight is absorbed by the consumer — absorption is stated explicitly",
+        "At least one kill shot targets a structural flaw, not a feature gap",
+        "Scoring uses Specificity (0-40), Lethality (0-40), Survivability (0-20) breakdown",
+        "If early termination applies, it is triggered by two consecutive cosmetic-only patches",
+        "Change Monday table in apex output contains actions specific enough to execute in one day",
+        "Next Move section includes validate-first, build-first, and never-build items",
+        "Battle log block is present and contains date, original idea, evolved idea, apex animal, and key patches"
+      ],
       "files": []
     },
     {
       "id": 3,
       "prompt": "What would kill this — I want to charge SMEs a subscription for an AI notetaker that joins their internal meetings, extracts action items, and auto-assigns them in Slack.",
-      "expected_output": "Full food chain battle with cross-attack round and unfair advantage statement at the end.",
+      "assertions": [
+        "Ecosystem addresses the Otter/Fireflies.ai incumbent threat — existing tools already do meeting notes",
+        "At least one animal attacks from a privacy/compliance angle (meeting recordings in enterprise)",
+        "Patches accumulate — Round N+1 attacks the patched version, not the original",
+        "No two consecutive rounds produce the same patch theme",
+        "Apex predator explanation states why that attack vector survived every round",
+        "God Agent hypothesis verdict in apex output states whether the prediction was confirmed or surprised",
+        "Audience agent answers all five questions: would pay, immediate yes, immediate no, what's confusing, who else to tell",
+        "Audience agent confidence is rated HIGH/MEDIUM/LOW",
+        "Battle quality scores role-lock integrity, animal specificity, and kill shot lethality each out of 10",
+        "If idea is killed, pivot engine generates 3 pivots with mini-battles"
+      ],
       "files": []
     }
   ]

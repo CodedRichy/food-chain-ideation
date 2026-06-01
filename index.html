@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Chain — A Field Guide to Idea Predators</title>
+  <meta name="description" content="52 animals. Elimination rounds. Only the strongest ideas survive. An adversarial stress-testing field guide for Claude Code.">
+  <meta property="og:title" content="Food Chain — Your Idea Has Predators">
+  <meta property="og:description" content="52 animals. Elimination rounds. A field guide to adversarial stress-testing.">
+  <meta property="og:image" content="banner.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129430;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f0ebe1;
+      --bg-paper: #faf8f3;
+      --bg-white: #ffffff;
+      --green-deep: #1e3a0e;
+      --green: #2d5016;
+      --green-mid: #4a7a2e;
+      --green-light: #6a9a48;
+      --green-bg: rgba(45, 80, 22, 0.06);
+      --brown: #5c3d1e;
+      --brown-mid: #7a6040;
+      --text: #1a1510;
+      --text-body: #2e2820;
+      --text-dim: #6a6258;
+      --text-muted: #9a9080;
+      --border: #d4cfc4;
+      --border-light: #e5dfd5;
+      --ruled: #ddd7cc;
+      --red: #7a1a12;
+      --red-light: #a03020;
+      --red-bg: rgba(122, 26, 18, 0.05);
+      --amber: #8a6a0a;
+      --amber-bg: rgba(138, 106, 10, 0.06);
+      --green-tag-bg: rgba(45, 80, 22, 0.08);
+      --display: 'Lora', Georgia, serif;
+      --body: 'Nunito Sans', system-ui, sans-serif;
+      --hand: 'Caveat', cursive;
+      --mono: 'JetBrains Mono', 'Consolas', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text-body);
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+    }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--green-mid), var(--green-light));
+      z-index: 10001; width: 0%;
+      transition: width 80ms linear;
+    }
+
+    /* ═══ Nav ═══ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; padding: 1rem 2rem;
+      transition: all 0.4s ease; background: transparent;
+    }
+    .nav.scrolled {
+      background: rgba(240, 235, 225, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 2rem;
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: var(--display); font-size: 1.3rem; font-weight: 900;
+      color: var(--green); text-decoration: none; letter-spacing: 0.03em;
+    }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a {
+      color: var(--text-dim); text-decoration: none; font-family: var(--body);
+      font-size: 0.88rem; font-weight: 600; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { width: 22px; height: 2px; background: var(--text); display: block; transition: 0.3s; }
+
+    /* ═══ Hero ═══ */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; padding: 7rem 2rem 4rem;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-label {
+      font-family: var(--hand); font-size: 1.4rem; color: var(--green-mid);
+      margin-bottom: 1.25rem; transform: rotate(-1deg); display: inline-block;
+    }
+    .hero-title {
+      font-family: var(--display); font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-weight: 900; line-height: 1.08; margin-bottom: 1.5rem; color: var(--text);
+    }
+    .hero-title .accent {
+      color: var(--green);
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem; color: var(--text-dim);
+      margin-bottom: 2.5rem; max-width: 420px; line-height: 1.6;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; padding: 0.7rem 1.6rem;
+      border-radius: 4px; font-family: var(--body); font-size: 0.92rem;
+      font-weight: 600; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: var(--green-deep); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(45, 80, 22, 0.2); }
+    .btn-secondary { background: transparent; color: var(--green); border: 1.5px solid var(--green-mid); }
+    .btn-secondary:hover { background: var(--green-bg); border-color: var(--green); }
+
+    /* ═══ Field Log (Terminal replacement) ═══ */
+    .field-log {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 2px 3px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02);
+      position: relative;
+    }
+    .field-log::before {
+      content: '';
+      position: absolute; top: 0; bottom: 0; left: 40px;
+      width: 1px; background: rgba(180, 60, 60, 0.15);
+      z-index: 1;
+    }
+    .field-log-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 1rem 0.6rem 52px;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-paper);
+    }
+    .field-log-title {
+      font-family: var(--hand); font-size: 1.15rem; color: var(--green);
+    }
+    .field-log-date {
+      font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted);
+    }
+    .field-log-body {
+      padding: 1rem 1.25rem 1rem 52px;
+      min-height: 300px; max-height: 400px;
+      overflow-y: auto;
+      font-family: var(--mono); font-size: 0.76rem; line-height: 1.75;
+      background:
+        repeating-linear-gradient(transparent, transparent 27px, var(--ruled) 27px, var(--ruled) 28px),
+        var(--bg-white);
+      color: var(--text-body);
+    }
+    .field-log-body::-webkit-scrollbar { width: 4px; }
+    .field-log-body::-webkit-scrollbar-track { background: transparent; }
+    .field-log-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .term-line { white-space: pre-wrap; word-break: break-word; min-height: 1.2em; }
+    .term-line.gold { color: var(--green); }
+    .term-line.red { color: var(--red); }
+    .term-line.green { color: var(--green-mid); }
+    .term-line.dim { color: var(--text-muted); }
+    .term-line.round { color: var(--brown); font-weight: 700; margin-top: 0.5em; }
+    .term-line.verdict { font-weight: 700; font-size: 0.82rem; margin-top: 0.5em; }
+    .hero-replay { display: none; margin-top: 0.5rem; text-align: right; }
+    .hero-replay button {
+      background: none; border: none; color: var(--text-muted);
+      font-family: var(--hand); font-size: 1.1rem; cursor: pointer; transition: color 0.3s;
+    }
+    .hero-replay button:hover { color: var(--green); }
+
+    /* ═══ Sections ═══ */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 5rem 0; position: relative; }
+    .section-title {
+      font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900; margin-bottom: 0.5rem; color: var(--text);
+    }
+    .section-subtitle {
+      color: var(--text-dim); font-size: 1.05rem;
+      margin-bottom: 3rem; max-width: 500px;
+    }
+    .section-note {
+      font-family: var(--hand); font-size: 1.35rem; color: var(--green-mid);
+      transform: rotate(-1deg); display: inline-block; margin-bottom: 3rem;
+    }
+    .divider {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 2rem; max-width: 1100px; margin: 0 auto;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .divider-leaf { color: var(--green-light); font-size: 1rem; opacity: 0.5; }
+
+    /* ═══ Stats ═══ */
+    .stats {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg-paper); padding: 2.5rem 2rem;
+    }
+    .stats-inner {
+      max-width: 800px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center;
+    }
+    .stat-number {
+      font-family: var(--hand); font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 700; color: var(--green); display: block; line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--body); font-size: 0.78rem;
+      color: var(--text-dim); text-transform: lowercase; font-style: italic;
+      margin-top: 0.25rem; display: block;
+    }
+
+    /* ═══ Steps ═══ */
+    .steps {
+      display: grid; grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 1.25rem; align-items: start;
+    }
+    .step {
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.75rem; position: relative;
+    }
+    .step-number {
+      font-family: var(--hand); font-size: 3.5rem; font-weight: 700;
+      color: rgba(45, 80, 22, 0.07); position: absolute; top: 0.25rem; right: 0.75rem; line-height: 1;
+    }
+    .step h3 {
+      font-family: var(--display); font-size: 1.1rem; font-weight: 700;
+      color: var(--green); margin-bottom: 0.5rem;
+    }
+    .step p { color: var(--text-dim); font-size: 0.92rem; }
+    .step-arrow { color: var(--border); font-size: 1.3rem; display: flex; align-items: center; padding-top: 1.5rem; }
+
+    /* ═══ Outcomes ═══ */
+    .outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .outcome-card {
+      padding: 1.75rem; border-radius: 2px;
+      border: 1px solid var(--border); background: var(--bg-white);
+    }
+    .outcome-card.survived { border-left: 3px solid var(--green); }
+    .outcome-card.restructured { border-left: 3px solid var(--amber); }
+    .outcome-card.killed { border-left: 3px solid var(--red); }
+    .stamp {
+      display: inline-block; padding: 0.15rem 0.65rem;
+      border: 2px solid currentColor; border-radius: 2px;
+      font-family: var(--display); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.7rem;
+      margin-bottom: 0.75rem; transform: rotate(-2deg); position: relative;
+    }
+    .stamp::after {
+      content: ''; position: absolute; inset: -3px;
+      border: 1px solid currentColor; border-radius: 2px; opacity: 0.2;
+    }
+    .stamp.survived { color: var(--green); }
+    .stamp.restructured { color: var(--amber); }
+    .stamp.killed { color: var(--red); }
+    .outcome-card h4 {
+      font-family: var(--display); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .outcome-card p { color: var(--text-dim); font-size: 0.88rem; }
+
+    /* ═══ Animals ═══ */
+    .animal-filters { display: flex; gap: 0.5rem; margin-bottom: 1.75rem; }
+    .filter-btn {
+      font-family: var(--body); font-size: 0.82rem; padding: 0.35rem 0.9rem;
+      border-radius: 2px; border: 1px solid var(--border); background: transparent;
+      color: var(--text-dim); cursor: pointer; transition: all 0.3s;
+    }
+    .filter-btn:hover { border-color: var(--green-mid); color: var(--green); }
+    .filter-btn.active { background: var(--green-tag-bg); border-color: var(--green-mid); color: var(--green); }
+    .animal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .animal-card {
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.5rem; transition: all 0.3s; cursor: default; position: relative;
+    }
+    .animal-card:hover {
+      box-shadow: 2px 4px 16px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .animal-card.hidden { display: none; }
+    .specimen-num {
+      position: absolute; top: 0.6rem; right: 0.75rem;
+      font-family: var(--hand); font-size: 0.85rem; color: var(--text-muted);
+    }
+    .animal-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .animal-emoji { font-size: 1.8rem; flex-shrink: 0; }
+    .animal-name { font-family: var(--display); font-size: 1.2rem; font-weight: 700; }
+    .animal-tag {
+      display: inline-block; font-family: var(--body); font-size: 0.68rem; font-style: italic;
+      color: var(--green); background: var(--green-tag-bg);
+      padding: 0.1rem 0.5rem; border-radius: 2px; margin-left: auto;
+    }
+    .animal-dna {
+      color: var(--text-dim); font-size: 0.88rem; line-height: 1.5;
+      padding-bottom: 0.5rem; border-bottom: 1px dashed var(--border-light);
+    }
+    .animal-details {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s ease, padding 0.45s ease;
+    }
+    .animal-card:hover .animal-details { max-height: 110px; padding-top: 0.6rem; }
+    .animal-detail-line { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+    .animal-detail-line strong { color: var(--text); font-weight: 600; }
+
+    /* ═══ Battles ═══ */
+    .battle-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .battle-card {
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;
+      border-left: 3px solid var(--border);
+    }
+    .battle-card:hover { box-shadow: 2px 4px 16px rgba(0,0,0,0.06); }
+    .battle-card[data-outcome="survived"] { border-left-color: var(--green); }
+    .battle-card[data-outcome="restructured"] { border-left-color: var(--amber); }
+    .battle-card[data-outcome="killed"] { border-left-color: var(--red); }
+    .battle-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .battle-title { font-family: var(--display); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .battle-meta-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted); }
+    .battle-original { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+    .battle-expand { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .battle-card.open .battle-expand { max-height: 700px; }
+    .battle-expand-inner { padding-top: 0.75rem; border-top: 1px dashed var(--border); margin-top: 0.5rem; }
+    .battle-field { margin-bottom: 0.6rem; }
+    .battle-field-label {
+      font-family: var(--hand); font-size: 0.85rem; color: var(--green-mid);
+      margin-bottom: 0.1rem;
+    }
+    .battle-field-value { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+    .battle-toggle { font-family: var(--hand); font-size: 1rem; color: var(--text-muted); display: inline-block; }
+    .battle-card.open .battle-toggle { display: none; }
+
+    /* ═══ Demo ═══ */
+    .demo-options { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .demo-btn {
+      font-family: var(--body); font-size: 0.82rem; padding: 0.55rem 1.1rem;
+      border-radius: 2px; border: 1px solid var(--border); background: var(--bg-white);
+      color: var(--text-dim); cursor: pointer; transition: all 0.3s;
+    }
+    .demo-btn:hover { border-color: var(--green-mid); color: var(--green); }
+    .demo-btn.active { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+    .demo-terminal { max-width: 680px; }
+    .demo-terminal .field-log-body { min-height: 260px; max-height: 360px; }
+    .demo-hint { font-family: var(--hand); font-size: 1.1rem; color: var(--text-muted); margin-top: 0.75rem; }
+
+    /* ═══ Skills ═══ */
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .skill-card {
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.75rem; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .skill-card:hover { box-shadow: 2px 4px 16px rgba(0,0,0,0.06); }
+    .skill-num {
+      font-family: var(--hand); font-size: 4.5rem; font-weight: 700;
+      color: rgba(45, 80, 22, 0.05); position: absolute; top: -0.5rem; right: 0.5rem; line-height: 1;
+    }
+    .skill-name {
+      font-family: var(--mono); font-size: 0.78rem; color: var(--green); margin-bottom: 0.4rem;
+    }
+    .skill-desc { font-family: var(--display); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3; }
+    .skill-detail { color: var(--text-dim); font-size: 0.88rem; }
+    .skill-trigger {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted);
+      margin-top: 0.75rem; padding-top: 0.6rem; border-top: 1px dashed var(--border-light);
+    }
+    .skill-trigger code { color: var(--green-mid); }
+
+    /* ═══ Install ═══ */
+    .install-section { text-align: center; padding: 5rem 2rem; position: relative; }
+    .install-title {
+      font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900; margin-bottom: 0.5rem; color: var(--text);
+    }
+    .install-note {
+      font-family: var(--hand); font-size: 1.4rem; color: var(--green-mid);
+      margin-bottom: 2.5rem; transform: rotate(-1deg); display: inline-block;
+    }
+    .install-card {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: 2px; padding: 0.9rem 1.4rem; margin-bottom: 1.75rem;
+      box-shadow: 1px 2px 8px rgba(0,0,0,0.04);
+    }
+    .install-card code { font-family: var(--mono); font-size: 0.88rem; color: var(--green); }
+    .install-copy {
+      background: var(--green-bg); border: 1px solid var(--green-mid); color: var(--green);
+      padding: 0.35rem 0.75rem; border-radius: 2px;
+      font-family: var(--mono); font-size: 0.72rem; cursor: pointer; transition: all 0.3s;
+    }
+    .install-copy:hover { background: rgba(45, 80, 22, 0.12); }
+    .install-envs { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+    .env-pill {
+      font-family: var(--body); font-size: 0.75rem; font-style: italic;
+      color: var(--text-dim); border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem; border-radius: 2px; background: var(--bg-paper);
+    }
+    .roadmap {
+      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;
+    }
+    .roadmap-item {
+      background: var(--bg-paper); border: 1px dashed var(--border);
+      border-radius: 2px; padding: 0.65rem 1.1rem; opacity: 0.55;
+    }
+    .roadmap-item .skill-name { margin-bottom: 0.15rem; }
+    .roadmap-item p { font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
+    .coming-soon {
+      font-family: var(--hand); font-size: 0.95rem; color: var(--amber);
+    }
+
+    /* ═══ Footer ═══ */
+    .footer { border-top: 1px solid var(--border); padding: 2rem 2rem; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-credit { font-size: 0.82rem; color: var(--text-dim); }
+    .footer-credit a { color: var(--green-mid); text-decoration: none; transition: color 0.3s; }
+    .footer-credit a:hover { color: var(--green); }
+    .footer-tagline { font-family: var(--hand); font-size: 1rem; color: var(--text-muted); }
+    .footer-version { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); }
+
+    /* ═══ Reveal ═══ */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero { min-height: auto; padding-top: 6rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(240, 235, 225, 0.97); backdrop-filter: blur(16px);
+        padding: 1.25rem 2rem; flex-direction: column; gap: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .steps { grid-template-columns: 1fr; }
+      .step-arrow { display: none; }
+      .outcomes { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    ::selection { background: rgba(45, 80, 22, 0.15); color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">FOOD CHAIN</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#how">How It Works</a>
+        <a href="#animals">Specimens</a>
+        <a href="#battles">Field Reports</a>
+        <a href="#demo">Observation</a>
+        <a href="#skills">Chapters</a>
+        <a href="#install">Install</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-label">A Field Guide to Adversarial Stress-Testing</div>
+        <h1 class="hero-title">Your idea has<br><span class="accent">predators.</span></h1>
+        <p class="hero-subtitle">52 specimens catalogued. Elimination rounds. Only the strongest ideas survive in the wild. A battle-testing suite for Claude Code.</p>
+        <div class="hero-ctas">
+          <a href="#demo" class="btn btn-primary">Watch an Observation</a>
+          <a href="#install" class="btn btn-secondary">Install the Guide</a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="field-log">
+          <div class="field-log-header">
+            <span class="field-log-title">Field Observation Log</span>
+            <span class="field-log-date">2026.06.01</span>
+          </div>
+          <div class="field-log-body" id="heroTerminal"></div>
+        </div>
+        <div class="hero-replay" id="heroReplay">
+          <button onclick="playHero()">&#8635; replay observation</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats">
+    <div class="stats-inner">
+      <div class="stat reveal">
+        <span class="stat-number" data-target="52">0</span>
+        <span class="stat-label">specimens catalogued</span>
+      </div>
+      <div class="stat reveal reveal-delay-1">
+        <span class="stat-number" data-target="4">0</span>
+        <span class="stat-label">chapters written</span>
+      </div>
+      <div class="stat reveal reveal-delay-2">
+        <span class="stat-number" data-target="8">0</span>
+        <span class="stat-label">categories identified</span>
+      </div>
+      <div class="stat reveal reveal-delay-3">
+        <span class="stat-number" data-target="0">0</span>
+        <span class="stat-label">dependencies required</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="container">
+      <h2 class="section-title reveal">How It Works</h2>
+      <div class="section-note reveal">~ three phases of natural selection ~</div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step-number">01</span>
+          <h3>Drop</h3>
+          <p>Your raw idea enters the ecosystem. We sharpen it &mdash; ICP, geography, core problem statement, hypothesis.</p>
+        </div>
+        <div class="step-arrow reveal reveal-delay-1">&rarr;</div>
+        <div class="step reveal reveal-delay-1">
+          <span class="step-number">02</span>
+          <h3>Battle</h3>
+          <p>Animals attack in elimination rounds. Weakest argument dies each round. Survivors absorb the kill insight.</p>
+        </div>
+        <div class="step-arrow reveal reveal-delay-2">&rarr;</div>
+        <div class="step reveal reveal-delay-2">
+          <span class="step-number">03</span>
+          <h3>Emerge</h3>
+          <p>Battle-hardened idea with unfair advantage statement. Or the idea dies &mdash; and three pivots are generated.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-leaf">&#9672;</span></div>
+
+  <section class="section" id="outcomes">
+    <div class="container">
+      <h2 class="section-title reveal">Three Outcomes</h2>
+      <p class="section-subtitle reveal">Every battle ends one of three ways.</p>
+      <div class="outcomes">
+        <div class="outcome-card survived reveal">
+          <span class="stamp survived">Survived</span>
+          <h4>Core thesis held</h4>
+          <p>The idea withstood every attack. Patches were cosmetic. Structural advantage confirmed. Build it.</p>
+        </div>
+        <div class="outcome-card restructured reveal reveal-delay-1">
+          <span class="stamp restructured">Restructured</span>
+          <h4>Premise died, tech preserved</h4>
+          <p>The original pitch was killed but core technology survived. New ICP, new moat, new angle emerged.</p>
+        </div>
+        <div class="outcome-card killed reveal reveal-delay-2">
+          <span class="stamp killed">Killed</span>
+          <h4>Pivot engine activates</h4>
+          <p>No structural advantage found. Three alternative pivots generated and mini-battled for survivability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-leaf">&#9672;</span></div>
+
+  <section class="section" id="animals">
+    <div class="container">
+      <h2 class="section-title reveal">The Specimens</h2>
+      <div class="section-note reveal">~ each animal represents a distinct, documented threat vector ~</div>
+      <div class="animal-filters reveal" id="animalFilters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="product">Product (32)</button>
+        <button class="filter-btn" data-filter="code">Code (20)</button>
+      </div>
+      <div class="animal-grid" id="animalGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-leaf">&#9672;</span></div>
+
+  <section class="section" id="battles">
+    <div class="container">
+      <h2 class="section-title reveal">Field Reports</h2>
+      <div class="section-note reveal">~ real battles, real ideas, documented outcomes ~</div>
+      <div class="battle-grid" id="battleGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-leaf">&#9672;</span></div>
+
+  <section class="section" id="demo">
+    <div class="container">
+      <h2 class="section-title reveal">Live Observation</h2>
+      <div class="section-note reveal">~ pick an idea, watch the predators attack ~</div>
+      <div class="demo-options reveal" id="demoOptions"></div>
+      <div class="demo-terminal reveal">
+        <div class="field-log">
+          <div class="field-log-header">
+            <span class="field-log-title">Observation in Progress</span>
+            <span class="field-log-date">DEMO</span>
+          </div>
+          <div class="field-log-body" id="demoTerminal">
+            <div class="term-line dim">Select a specimen above to begin observation...</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-hint reveal">Pre-scripted excerpts from documented field reports. Install the guide for the real thing.</div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-leaf">&#9672;</span></div>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section-title reveal">Chapters</h2>
+      <div class="section-note reveal">~ four skills, one install, complete lifecycle ~</div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <span class="skill-num">I</span>
+          <div class="skill-name">food-chain-ideation</div>
+          <div class="skill-desc">Product Idea Battles</div>
+          <p class="skill-detail">32 animals attack your product idea in elimination rounds. Blind scoring. Audience simulation. Pivot engine when killed.</p>
+          <div class="skill-trigger">Trigger: <code>food chain my idea: ...</code></div>
+        </div>
+        <div class="skill-card reveal reveal-delay-1">
+          <span class="skill-num">II</span>
+          <div class="skill-name">food-chain-code</div>
+          <div class="skill-desc">Architecture Battles</div>
+          <p class="skill-detail">20 code animals stress-test your architecture. Scale, security, maintenance, and team-dynamics attacks.</p>
+          <div class="skill-trigger">Trigger: <code>food chain code: ...</code></div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2">
+          <span class="skill-num">III</span>
+          <div class="skill-name">apex-to-action</div>
+          <div class="skill-desc">Battle &rarr; 90-Day Plan</div>
+          <p class="skill-detail">Converts battle output into a validated 90-day execution plan. Validation gates. Three phases. Kill list.</p>
+          <div class="skill-trigger">Trigger: <code>apex to action: [paste log]</code></div>
+        </div>
+        <div class="skill-card reveal reveal-delay-3">
+          <span class="skill-num">IV</span>
+          <div class="skill-name">food-chain-monitor</div>
+          <div class="skill-desc">Delta Re-Testing</div>
+          <p class="skill-detail">After pivots or market changes, tests only new assumptions. 3 animals, 2 rounds max. Under 5 minutes.</p>
+          <div class="skill-trigger">Trigger: <code>food chain monitor: [changes]</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-leaf">&#9672;</span></div>
+
+  <section class="install-section reveal" id="install">
+    <h2 class="install-title">Begin your field work.</h2>
+    <div class="install-note">zero dependencies, one command, works everywhere</div>
+    <div class="install-card">
+      <code>npx skills add CodedRichy/food-chain-ideation</code>
+      <button class="install-copy" id="copyBtn" onclick="copyInstall()">Copy</button>
+    </div>
+    <div class="install-envs">
+      <span class="env-pill">Claude Code</span>
+      <span class="env-pill">Claude.ai</span>
+      <span class="env-pill">Cursor</span>
+      <span class="env-pill">Windsurf</span>
+      <span class="env-pill">Copilot</span>
+    </div>
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="coming-soon">In the field</div>
+        <div class="skill-name">food-chain-pitch</div>
+        <p>Investor stress-tester</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="coming-soon">In the field</div>
+        <div class="skill-name">food-chain-hire</div>
+        <p>Hiring decision battles</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="coming-soon">In the field</div>
+        <div class="skill-name">food-chain-price</div>
+        <p>Pricing model attacks</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-credit">Field guide by <a href="https://github.com/CodedRichy" target="_blank" rel="noopener">Rishi Praseeth Krishnan</a></span>
+      <span class="footer-tagline">No ideas were permanently harmed.</span>
+      <span class="footer-version">v2.0.0</span>
+    </div>
+  </footer>
+
+  <script>
+    const ANIMALS = [
+      { emoji: '\u{1F426}\u{200D}\u{2B1B}', name: 'Crow', cat: 'product', tag: 'Cunning', dna: 'Forensic reverse-engineer. Deconstructs your product into commodity components and shows each one is replicable.', kills: 'Proving each layer can be rebuilt cheaper', best: 'AI wrappers, aggregator plays, thin-moat SaaS' },
+      { emoji: '\u{1F98A}', name: 'Fox', cat: 'product', tag: 'Cunning', dna: 'Trust architect. Simulates trust-destruction events: data breach, downtime during launch, founder scandal.', kills: 'Revealing single points of trust failure', best: 'Health, finance, sensitive data products' },
+      { emoji: '\u{1F40D}', name: 'Snake', cat: 'product', tag: 'Cunning', dna: 'Price undercutter. Models the scenario where a competitor offers 80% of your value at 20% of the price.', kills: 'The race to free from an unexpected angle', best: 'Premium tools, products with OSS alternatives' },
+      { emoji: '\u{1F982}', name: 'Scorpion', cat: 'product', tag: 'Cunning', dna: 'Loyalty poisoner. Finds the exact moment your power users have incentive to leave.', kills: 'The graduation moment users outgrow you', best: 'Prosumer tools, creator platforms' },
+      { emoji: '\u{1F988}', name: 'Shark', cat: 'product', tag: 'Brute Force', dna: 'Incumbent cloner. Simulates a trillion-dollar company adding your core feature as a checkbox.', kills: 'Feature absorption by platform owners', best: 'Any feature adjacent to FAANG products' },
+      { emoji: '\u{1F43A}', name: 'Wolf', cat: 'product', tag: 'Brute Force', dna: 'Blitzscale predator. Well-funded clone launches in three markets simultaneously using your playbook.', kills: 'Speed + capital overwhelming first-mover', best: 'Marketplaces, delivery, network-effect plays' },
+      { emoji: '\u{1FAB1}', name: 'Tapeworm', cat: 'product', tag: 'Parasite', dna: 'Platform dependency. Maps every external dependency and simulates each one cutting you off.', kills: 'The platform you depend on becoming your competitor', best: 'Apps on Shopify, Salesforce, iOS, social APIs' },
+      { emoji: '\u{1F99F}', name: 'Mosquito', cat: 'product', tag: 'Environmental', dna: 'Regulation sensor. Finds the specific regulation that makes your core loop illegal.', kills: 'Regulatory kill shots from GDPR, HIPAA, etc.', best: 'Data-heavy, cross-border, health/finance' },
+      { emoji: '\u{1F40A}', name: 'Crocodile', cat: 'product', tag: 'Environmental', dna: 'Patience predator. Waits for you to validate the market, then strikes when you have traction.', kills: 'Late-entry competitors who skip your R&D', best: 'Novel categories, first-movers' },
+      { emoji: '\u{1F412}', name: 'Chimpanzee', cat: 'product', tag: 'Psychological', dna: 'Copycat improver. Copies your product but adds the one feature your users keep requesting.', kills: 'Feature parity plus the thing you refused to build', best: 'Opinionated products, vocal communities' },
+      { emoji: '\u{1F9A5}', name: 'Sloth', cat: 'code', tag: 'Maintenance', dna: 'Year-3 maintainer. Fast-forwards 36 months. Who maintains this when the team has rotated?', kills: 'Architecture requiring tribal knowledge to operate', best: 'Monoliths, custom frameworks' },
+      { emoji: '\u{1F418}', name: 'Elephant', cat: 'code', tag: 'Scale', dna: '100x load tester. What happens at 100x current traffic with zero architecture changes?', kills: 'The first bottleneck with no horizontal path', best: 'DB schema decisions, real-time systems' },
+      { emoji: '\u{1F99D}', name: 'Raccoon', cat: 'code', tag: 'Security', dna: 'Penetration tester. Finds the three most obvious security holes in minutes.', kills: 'The attack vector you assumed was someone else\'s job', best: 'Auth systems, API design, data pipelines' },
+      { emoji: '\u{1F425}', name: 'Duckling', cat: 'code', tag: 'Team', dna: 'New hire simulator. Day-one onboarding: can they ship a feature without tribal knowledge?', kills: 'The undocumented step blocking every new engineer', best: 'Legacy systems, rapid-growth teams' },
+    ];
+
+    const BATTLES = [
+      { title: 'Viral Content Repurposer', outcome: 'restructured', animals: 5, rounds: 4, mode: 'SUBAGENT', apex: '\u{1F426}\u{200D}\u{2B1B} Crow', original: 'SaaS tool ($29/mo) for solo creators that detects viral content and auto-repurposes across platforms within minutes.', ecosystem: '\u{1FAB1} Tapeworm · \u{1F988} Shark · \u{1F422} Tortoise · \u{1F99F} Mosquito · \u{1F426}\u{200D}\u{2B1B} Crow', evolved: 'Cross-creator structural intelligence platform detecting emerging format patterns 48 hours before public analytics.', uas: 'Anonymized cross-creator performance network detects emerging patterns 48hrs before public analytics.', insight: 'Creators don\'t need speed — they need structural intelligence.' },
+      { title: 'MealBot Office Coordinator', outcome: 'killed', animals: 5, rounds: 4, mode: 'FALLBACK', apex: '\u{1F426}\u{200D}\u{2B1B} Crow', original: 'AI meal coordinator for Indian SMEs. Bulk lunch orders from Swiggy/Zomato, preference tracking, budget management.', ecosystem: '\u{1FAB1} Tapeworm · \u{1F402} Ox · \u{1F99D} Raccoon · \u{1F40A} Crocodile · \u{1F426}\u{200D}\u{2B1B} Crow', evolved: 'B2B caterer procurement intelligence for facility managers at 500+ employee companies.', uas: 'Cross-company caterer benchmarking network — every client improves the dataset.', insight: 'Fatal ethnographic assumption: 70-80% of Indian offices above 25 employees use contracted caterers, not Swiggy.' },
+      { title: 'Email Audio Briefing', outcome: 'killed', animals: 5, rounds: 4, mode: 'FALLBACK', apex: '\u{1F426}\u{200D}\u{2B1B} Crow', original: 'Browser extension + app ($9/mo) that summarizes unread emails into a 60-second audio briefing.', ecosystem: '\u{1F982} Scorpion · \u{1F981} Lion · \u{1F98E} Chameleon · \u{1F98A} Fox · \u{1F426}\u{200D}\u{2B1B} Crow', evolved: 'Email thread intelligence API/SDK sold B2B as embedded middleware.', uas: 'None survives. Four pivots, zero remaining differentiation.', insight: '"You started with a megaphone and ended with a magnifying glass, and Google already makes both."' },
+      { title: 'AI Meeting Notetaker', outcome: 'survived', animals: 5, rounds: 4, mode: 'FALLBACK', apex: '\u{1F426}\u{200D}\u{2B1B} Crow', original: 'AI notetaker ($19/mo per team) for SMEs. Joins meetings, extracts action items, auto-assigns in Slack.', ecosystem: '\u{1FAB1} Tapeworm · \u{1F418} Elephant · \u{1F422} Tortoise · \u{1F99F} Mosquito · \u{1F426}\u{200D}\u{2B1B} Crow', evolved: 'Omni-channel action capture and routing platform with cross-tool org graph.', uas: 'Cross-tool organizational graph compounds with every interaction processed.', insight: 'The meeting bot was a feature, not a product. Survival came from owning the cross-tool org graph.' },
+    ];
+
+    const DEMOS = [
+      { title: 'MealBot — Killed', lines: [
+        { text: '> Idea: "AI meal coordinator for Indian SME offices"', cls: 'gold' },
+        { text: '> ICP: Office managers, IT companies, Bangalore/Hyderabad/Pune', cls: 'dim' },
+        { text: '> Ecosystem: \u{1FAB1} Tapeworm · \u{1F402} Ox · \u{1F99D} Raccoon · \u{1F40A} Crocodile · \u{1F426}\u{200D}\u{2B1B} Crow', cls: 'gold' },
+        { text: '', cls: '' },
+        { text: '━━ ROUND 1 ━━', cls: 'round' },
+        { text: '\u{1F426}\u{200D}\u{2B1B} Crow attacks...', cls: 'gold' },
+        { text: '"70-80% of target offices use contracted caterers, not Swiggy.', cls: '' },
+        { text: ' MealBot automates a workflow that barely exists."', cls: '' },
+        { text: '☠ Premise is empirically false for majority of ICP', cls: 'red' },
+        { text: '❌ Crocodile eliminated · Crow: 94/100', cls: 'dim' },
+        { text: '', cls: '' },
+        { text: '━━ ROUND 4 (FINAL) ━━', cls: 'round' },
+        { text: '\u{1F426}\u{200D}\u{2B1B} Crow attacks...', cls: 'gold' },
+        { text: '"Multi-vendor orchestration already exists — it\'s called Sodexo.', cls: '' },
+        { text: ' You\'re bringing a spreadsheet to a knife fight in a kitchen."', cls: '' },
+        { text: '☠ Software cannot disintermediate physical infrastructure', cls: 'red' },
+        { text: '', cls: '' },
+        { text: '━━ VERDICT: KILLED ━━', cls: 'red verdict' },
+        { text: 'Every pivot hit a new structural wall.', cls: 'dim' },
+        { text: 'Kernel: B2B caterer procurement intelligence for large enterprises', cls: 'gold' },
+      ]},
+      { title: 'Email Briefing — Killed', lines: [
+        { text: '> Idea: "Email audio briefing extension — $9/mo"', cls: 'gold' },
+        { text: '> ICP: VP/Director level, 200-2000 employee companies, US/UK', cls: 'dim' },
+        { text: '> Ecosystem: \u{1F982} Scorpion · \u{1F981} Lion · \u{1F98E} Chameleon · \u{1F98A} Fox · \u{1F426}\u{200D}\u{2B1B} Crow', cls: 'gold' },
+        { text: '', cls: '' },
+        { text: '━━ ROUND 1 ━━', cls: 'round' },
+        { text: '\u{1F981} Lion attacks...', cls: 'gold' },
+        { text: '"Google Gemini summarizes Gmail. Copilot does Outlook.', cls: '' },
+        { text: ' IT will block your extension before approving a $9 tool."', cls: '' },
+        { text: '☠ Platform incumbents ship this for free', cls: 'red' },
+        { text: '❌ Chameleon eliminated · Lion: 88/100', cls: 'dim' },
+        { text: '', cls: '' },
+        { text: '━━ ROUND 4 (FINAL) ━━', cls: 'round' },
+        { text: '\u{1F426}\u{200D}\u{2B1B} Crow attacks...', cls: 'gold' },
+        { text: '"You started with a megaphone and ended with a magnifying glass,', cls: '' },
+        { text: ' and Google already makes both."', cls: '' },
+        { text: '☠ Four pivots, zero remaining differentiation', cls: 'red' },
+        { text: '', cls: '' },
+        { text: '━━ VERDICT: KILLED ━━', cls: 'red verdict' },
+        { text: 'Building on rented land against the landlord.', cls: 'dim' },
+        { text: 'No unfair advantage survives the battle intact.', cls: 'red' },
+      ]},
+      { title: 'Meeting Notetaker — Survived', lines: [
+        { text: '> Idea: "AI meeting notetaker for SMEs — $19/mo per team"', cls: 'gold' },
+        { text: '> ICP: Ops managers at growing startups, US/UK/India', cls: 'dim' },
+        { text: '> Ecosystem: \u{1FAB1} Tapeworm · \u{1F418} Elephant · \u{1F422} Tortoise · \u{1F99F} Mosquito · \u{1F426}\u{200D}\u{2B1B} Crow', cls: 'gold' },
+        { text: '', cls: '' },
+        { text: '━━ ROUND 1 ━━', cls: 'round' },
+        { text: '\u{1F418} Elephant attacks...', cls: 'gold' },
+        { text: '"Microsoft Copilot and Google Gemini do this for free.', cls: '' },
+        { text: ' Bundled with software your ICP already pays for."', cls: '' },
+        { text: '☠ Bundled feature at zero incremental cost', cls: 'red' },
+        { text: '❌ Tortoise eliminated · Elephant: 90/100', cls: 'dim' },
+        { text: '\u{1F6E1} Patch: Target Zoom+Slack shops, cross-platform routing', cls: 'green' },
+        { text: '', cls: '' },
+        { text: '━━ ROUND 4 (FINAL) ━━', cls: 'round' },
+        { text: '\u{1F426}\u{200D}\u{2B1B} Crow attacks...', cls: 'gold' },
+        { text: '"Universal action-item extraction is Linear/Asana\'s roadmap."', cls: '' },
+        { text: 'Neither attack is lethal. Idea absorbs each reframe.', cls: 'green' },
+        { text: '', cls: '' },
+        { text: '━━ VERDICT: SURVIVED ━━', cls: 'green verdict' },
+        { text: 'Evolved: Omni-channel action capture + cross-tool org graph', cls: 'gold' },
+        { text: 'UAS: "Cross-tool org graph compounds — no single vendor can replicate"', cls: 'gold' },
+      ]},
+    ];
+
+    class TypeWriter {
+      constructor(el) { this.el = el; this.stopped = false; }
+      stop() { this.stopped = true; }
+      wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+      async play(lines) {
+        this.el.innerHTML = ''; this.stopped = false;
+        for (const line of lines) {
+          if (this.stopped) return;
+          if (line.pause) { await this.wait(line.pause); continue; }
+          const div = document.createElement('div');
+          div.className = 'term-line ' + (line.cls || '');
+          this.el.appendChild(div);
+          if (line.text === '') { div.innerHTML = ' '; }
+          else {
+            const speed = line.text.length > 70 ? 12 : line.text.length > 40 ? 18 : 22;
+            for (let i = 0; i < line.text.length; i++) {
+              if (this.stopped) return;
+              div.textContent = line.text.substring(0, i + 1);
+              await this.wait(speed);
+            }
+          }
+          this.el.scrollTop = this.el.scrollHeight;
+          if (line.cls && line.cls.includes('round')) await this.wait(400);
+          else if (line.cls && line.cls.includes('verdict')) await this.wait(600);
+          else await this.wait(80);
+        }
+      }
+    }
+
+    const heroLines = [
+      { text: '> Idea: "Viral content repurposer for solo creators — $29/mo"', cls: 'gold' },
+      { text: '> ICP: Solo creators, 10k-500k followers, fitness/lifestyle/finance', cls: 'dim' },
+      { text: '> Ecosystem: \u{1FAB1} Tapeworm · \u{1F988} Shark · \u{1F422} Tortoise · \u{1F99F} Mosquito · \u{1F426}\u{200D}\u{2B1B} Crow', cls: 'gold' },
+      { text: '', cls: '' },
+      { text: '━━ ROUND 1 ━━', cls: 'round' },
+      { text: '\u{1F426}\u{200D}\u{2B1B} Crow attacks...', cls: 'gold' },
+      { text: '"Platform algorithms are independent — TikTok peaks over 72hrs,', cls: '' },
+      { text: ' YouTube Shorts over 7 days. Cross-platform speed is meaningless."', cls: '' },
+      { text: '☠ Zero algorithmic advantage on destination platforms', cls: 'red' },
+      { text: '❌ Tortoise eliminated · Crow: 96/100', cls: 'dim' },
+      { text: '\u{1F6E1} Patch: Creator-in-the-loop approval', cls: 'green' },
+      { text: '', cls: '' },
+      { text: '━━ ROUND 4 (FINAL) ━━', cls: 'round' },
+      { text: '\u{1F426}\u{200D}\u{2B1B} Crow attacks...', cls: 'gold' },
+      { text: '"Structural optimization converges. Thousands using same tool', cls: '' },
+      { text: ' → identical posts. Platforms suppress templated uniformity."', cls: '' },
+      { text: '☠ The product self-destructs at scale', cls: 'red' },
+      { text: '', cls: '' },
+      { text: '━━ VERDICT: RESTRUCTURED ━━', cls: 'gold verdict' },
+      { text: 'Apex: \u{1F426}\u{200D}\u{2B1B} Crow (structural convergence detection)', cls: 'gold' },
+      { text: '→ Cross-creator structural intelligence platform', cls: 'gold' },
+      { text: 'UAS: "Network detects patterns 48hrs before public analytics"', cls: 'dim' },
+    ];
+
+    const heroEl = document.getElementById('heroTerminal');
+    const heroTyper = new TypeWriter(heroEl);
+    function playHero() {
+      document.getElementById('heroReplay').style.display = 'none';
+      heroTyper.play(heroLines).then(() => {
+        document.getElementById('heroReplay').style.display = 'block';
+      });
+    }
+
+    const animalGrid = document.getElementById('animalGrid');
+    ANIMALS.forEach((a, i) => {
+      const card = document.createElement('div');
+      card.className = 'animal-card reveal';
+      card.dataset.cat = a.cat;
+      card.innerHTML = `
+        <span class="specimen-num">#${String(i + 1).padStart(3, '0')}</span>
+        <div class="animal-head">
+          <span class="animal-emoji">${a.emoji}</span>
+          <span class="animal-name">${a.name}</span>
+          <span class="animal-tag">${a.tag}</span>
+        </div>
+        <p class="animal-dna">${a.dna}</p>
+        <div class="animal-details">
+          <p class="animal-detail-line"><strong>Kills with:</strong> ${a.kills}</p>
+          <p class="animal-detail-line"><strong>Best against:</strong> ${a.best}</p>
+        </div>`;
+      animalGrid.appendChild(card);
+    });
+
+    document.getElementById('animalFilters').addEventListener('click', e => {
+      if (!e.target.classList.contains('filter-btn')) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      const f = e.target.dataset.filter;
+      document.querySelectorAll('.animal-card').forEach(c => c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f));
+    });
+
+    const battleGrid = document.getElementById('battleGrid');
+    BATTLES.forEach(b => {
+      const card = document.createElement('div');
+      card.className = 'battle-card reveal';
+      card.dataset.outcome = b.outcome;
+      card.onclick = () => card.classList.toggle('open');
+      card.innerHTML = `
+        <div class="battle-meta">
+          <span class="stamp ${b.outcome}">${b.outcome.toUpperCase()}</span>
+          <span class="battle-meta-tag">${b.animals} animals · ${b.rounds} rounds · ${b.mode}</span>
+        </div>
+        <div class="battle-title">${b.title}</div>
+        <p class="battle-original">${b.original}</p>
+        <span class="battle-toggle">▶ expand field notes</span>
+        <div class="battle-expand"><div class="battle-expand-inner">
+          <div class="battle-field"><div class="battle-field-label">Ecosystem</div><div class="battle-field-value">${b.ecosystem}</div></div>
+          <div class="battle-field"><div class="battle-field-label">Apex Predator</div><div class="battle-field-value">${b.apex}</div></div>
+          <div class="battle-field"><div class="battle-field-label">Evolved Idea</div><div class="battle-field-value">${b.evolved}</div></div>
+          <div class="battle-field"><div class="battle-field-label">Unfair Advantage</div><div class="battle-field-value">${b.uas}</div></div>
+          <div class="battle-field"><div class="battle-field-label">Key Insight</div><div class="battle-field-value">${b.insight}</div></div>
+        </div></div>`;
+      battleGrid.appendChild(card);
+    });
+
+    const demoOpts = document.getElementById('demoOptions');
+    const demoEl = document.getElementById('demoTerminal');
+    let demoTyper = new TypeWriter(demoEl);
+    DEMOS.forEach(d => {
+      const btn = document.createElement('button');
+      btn.className = 'demo-btn'; btn.textContent = d.title;
+      btn.onclick = () => {
+        demoTyper.stop(); demoTyper = new TypeWriter(demoEl);
+        document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active'); demoTyper.play(d.lines);
+      };
+      demoOpts.appendChild(btn);
+    });
+
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (window.scrollY / h * 100) + '%';
+    }, { passive: true });
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, target = parseInt(el.dataset.target);
+        if (el.dataset.counted) return; el.dataset.counted = '1';
+        let start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          const p = Math.min((ts - start) / 1200, 1);
+          el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number').forEach(el => counterObs.observe(el));
+
+    function copyInstall() {
+      navigator.clipboard.writeText('npx skills add CodedRichy/food-chain-ideation');
+      const b = document.getElementById('copyBtn');
+      b.textContent = 'Copied!'; setTimeout(() => b.textContent = 'Copy', 1500);
+    }
+
+    setTimeout(playHero, 600);
+  </script>
+</body>
+</html>

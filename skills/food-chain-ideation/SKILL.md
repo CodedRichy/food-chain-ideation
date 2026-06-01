@@ -1,21 +1,27 @@
 ---
 name: food-chain-ideation
-version: 2.0.0
+version: 2.1.0
 description: >
-  Adversarial product stress-tester. Dynamically selects animal agents from a behavioral
-  DNA library matched to the specific problem, each attacking under strict role-lock with
-  zero shared context. Weakest eliminated each round, survivor absorbs the insight and
-  evolves, idea patches itself until one apex predator stands. Works in Claude.ai,
-  Claude Code, Cursor, Windsurf, Copilot, and any agent with no dependencies.
-  Trigger on: "food chain", "pressure test", "stress test", "tear this apart",
-  "what kills this", "battle test", "adversarial review", "poke holes in this".
+  10-minute pre-ship stress-test. Run this before you ship, not instead of shipping.
+  Dynamically selects animal agents from a behavioral DNA library matched to the specific
+  problem, each attacking under strict role-lock with zero shared context. Weakest
+  eliminated each round, survivor absorbs the insight and evolves, idea patches itself
+  until one apex predator stands. Quick mode (5 animals, 1 round) for fast verdicts.
+  Full mode for high-stakes decisions. Works in Claude.ai, Claude Code, Cursor, Windsurf,
+  Copilot, and any agent with no dependencies.
+when_to_use: >
+  "food chain", "pressure test", "stress test", "tear this apart",
+  "what kills this", "battle test", "adversarial review", "poke holes in this",
+  "what would kill this idea", "attack my idea", "is this idea any good"
+argument-hint: "[your idea]"
 ---
 
 # Food Chain Ideation
 
-Adversarial product stress-tester. Each agent attacks from a distinct angle under
-strict role-lock. Weak arguments are eliminated each round. Survivors absorb and
-evolve. The idea patches itself. One apex predator remains.
+10-minute pre-ship stress-test. Run this before you build, not instead of building.
+Each agent attacks from a distinct angle under strict role-lock. Weak arguments
+eliminated each round. Survivors absorb and evolve. The idea patches itself.
+One apex predator remains. Output tells you what to change Monday morning.
 
 ---
 
@@ -90,19 +96,67 @@ degraded inference environment, cap at 3 agents automatically and state this exp
 
 ---
 
+## Quick Mode
+
+Default entry point for first-time users and fast pre-ship checks. Offer quick mode
+before full mode unless the user explicitly requests a full battle.
+
+```
+Quick mode: 5 curated animals, 1 round, no elimination.
+Full mode:  3–9 animals, elimination rounds, absorption, apex predator.
+
+Which mode? [quick / full]
+```
+
+**Quick mode rules:**
+- 5 animals selected from the library, covering the three minimum ecosystem requirements
+  (structural hunter + status quo + resource threat) plus two idea-specific threats
+- 1 round only. All 5 attack in parallel. Blind scoring ranks them.
+- No elimination, no absorption, no patching between rounds.
+- Output is a priority-ranked table: top 3 findings ordered by "what changes your
+  next action," not by score. Each finding includes a one-sentence "Change Monday"
+  action — what the builder should do differently based on this attack.
+- Total time: under 10 minutes including ecosystem design.
+
+**Quick mode output:**
+
+```markdown
+## Quick Battle — Verdict
+
+| Priority | Threat | Change Monday |
+|---|---|---|
+| 1 | [most actionable finding — one sentence] | [what to do differently — one sentence] |
+| 2 | [second finding] | [action] |
+| 3 | [third finding] | [action] |
+
+**Overall:** [SHIP / SHIP WITH CHANGES / PAUSE AND RETHINK]
+
+> Run `full mode` to stress-test with elimination rounds and compound pressure.
+```
+
+**When to recommend full mode instead:** Platform businesses, regulated industries,
+multi-sided marketplaces, or any idea where the user says "this is high-stakes."
+Quick mode is for the 80% case: solo builder validating before shipping.
+
+---
+
 ## Step 1 — Ecosystem Design
 
 Select from `references/animal-library.md`. Use the Quick Selection Guide first.
 
 **Announce the ecosystem with attack vectors visible:**
 
-```
-ECOSYSTEM
-[emoji] [Animal]  — [Role] — [Attack vector in one line]
-[emoji] [Animal]  — [Role] — [Attack vector in one line]
-[...]
+```markdown
+## Ecosystem
 
-God Agent hypothesis: [Restate the kill hypothesis from Step 0]
+| | Animal | Role | Attack Vector |
+|---|---|---|---|
+| [emoji] | [Animal] | [Role] | [one line] |
+| [emoji] | [Animal] | [Role] | [one line] |
+| ... | ... | ... | ... |
+
+**God Agent hypothesis:** [Restate the kill hypothesis from Step 0]
+**Execution:** [SUBAGENT / FALLBACK] — [reason]
 ```
 
 ---
@@ -129,7 +183,8 @@ Each animal is spawned as an independent subagent. The subagent receives ONLY:
   already patched, forcing a new approach.
 - Instruction: "You are [Animal]. Attack this idea from your behavioral DNA.
   You have zero knowledge of any other attacker or any other attack. Produce
-  one attack (120–150 words) and one Kill Shot (one sentence)."
+  one attack (120–150 words), a 2-sentence summary of the attack, and one
+  Kill Shot (one sentence)."
 
 Subagents run in parallel per round. God Agent collects all attacks, scores them,
 eliminates the weakest, applies absorption and patching, then spawns the next round
@@ -174,41 +229,37 @@ the attack.
 
 ### Output Rendering
 
-In subagent mode, animals execute in parallel but the God Agent MUST render all
-output sequentially in a single clean block. Collect all subagent responses before
-printing anything. Never stream partial subagent results interleaved with other
-output — wait for the full round to complete, then render the entire round structure
-as one formatted block. This prevents garbled or interleaved output in CLI environments.
+In subagent mode, animals execute in parallel but the God Agent MUST collect all
+subagent responses before printing anything. Never stream partial results. Wait
+for the full round to complete, then render the entire round as one block.
+
+**Compression rule:** Subagents produce full 120–150 word attacks (needed for scoring
+quality). The God Agent renders only the 2-sentence summary and kill shot in the round
+table. Full attack text is used internally for blind scoring but NOT displayed. This
+keeps rounds scannable while preserving attack depth for the scoring agent.
 
 ### Round structure
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ROUND [N]  ·  [X] animals remaining
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```markdown
+## Round [N] — [X] animals remaining
 
-[emoji] [ANIMAL] — [Role]
-[Attack in full persona. Concrete. Specific to this idea.
-No generic risk language. 120–150 words maximum.]
-Kill Shot: [One sentence. If true, kills the idea entirely.]
+| | Animal | Attack Summary | Kill Shot |
+|---|---|---|---|
+| [emoji] | [Animal] | [2-sentence summary] | [kill shot sentence] |
+| [emoji] | [Animal] | [2-sentence summary] | [kill shot sentence] |
+| ... | ... | ... | ... |
 
-[Repeat for each surviving animal]
+### Scores
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SCORING
-[emoji] [Animal]  ████████░░  [score]  [one-line verdict]
-[...]
+| | Animal | Spec | Leth | Surv | Total | Verdict |
+|---|---|---|---|---|---|---|
+| [emoji] | [Animal] | /40 | /40 | /20 | **/100** | [one-line] |
+| ... | ... | ... | ... | ... | ... | ... |
 
-Specificity (0–40)  ·  Lethality (0–40)  ·  Survivability (0–20)
-Lowest eliminated. Highest consumes.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[emoji] [EATER] consumes [emoji] [EATEN]
-
-Absorbed:   [Single sharpest insight transferred to survivor]
-Evolution:  [How the survivor's attack grows stronger — 2 sentences]
-Idea patch: [Concrete upgrade the idea must make to survive this round]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+> **Eliminated:** [emoji] [Animal]
+> **Consumed by:** [emoji] [Animal]
+> **Absorbed:** [single sharpest insight]
+> **Idea patch:** [concrete change to survive this round]
 ```
 
 **Early termination rule:** If an idea survives two consecutive rounds with only
@@ -222,17 +273,57 @@ Then proceed to the apex output.
 ## Audience Agent
 
 After the final round and before the apex output, spawn one final subagent (or role-play
-in fallback mode) — the ICP itself. Construct the persona from the sharpened input in
-pre-flight check #1. Give them the evolved idea and the unfair advantage statement.
+in fallback mode) — the ICP itself.
 
-The audience agent is NOT an attacker. It is a buyer simulation. It answers:
-- Would you pay for this?
-- What would make you say yes immediately?
-- What would make you say no?
+### Persona Construction
 
-In subagent mode, the audience agent receives ONLY the evolved idea, the unfair advantage
-statement, and the ICP description. Zero battle context. Zero knowledge of which animals
-attacked or what was eliminated. It reacts to the final product, not the process.
+Build the persona from the sharpened input in pre-flight check #1. The persona must include:
+- **Role:** job title or life situation (e.g., "solo founder, 6 months in, first SaaS")
+- **Context:** what they're doing today to solve this problem (the status quo)
+- **Constraints:** budget, time, team size, technical ability
+- **Motivation:** why they'd look for a solution right now (trigger event)
+- **Skepticism profile:** what makes them say no to new tools in general
+
+If the pre-flight input is too thin to construct all five, fill gaps with the most
+conservative plausible defaults (lowest budget, least time, most skeptical).
+
+### What It Receives
+
+In subagent mode, the audience agent receives ONLY:
+- The evolved idea (final patched version)
+- The unfair advantage statement
+- The constructed ICP persona
+
+Zero battle context. Zero knowledge of which animals attacked or what was eliminated.
+It reacts to the final product, not the process.
+
+### What It Answers
+
+The audience agent answers five questions, not three:
+
+1. **Would you pay for this?** (or invest time if free) — yes/maybe/no with one sentence why
+2. **What would make you say yes immediately?** — the single trigger
+3. **What would make you say no?** — the single dealbreaker
+4. **What's confusing?** — the part of the pitch that doesn't land on first read
+5. **Who else would you tell about this?** — zero people (bad sign), or specific
+   role/community (distribution signal)
+
+### Confidence Calibration
+
+After answering, the audience agent rates its own confidence:
+- **HIGH** — "I know exactly what this is and whether I want it"
+- **MEDIUM** — "I get the concept but need to see it working"
+- **LOW** — "I'm not sure this is for me or what it replaces"
+
+LOW confidence is a signal the evolved idea's positioning is unclear — the battle
+hardened the product but not the pitch. Flag this in the apex output.
+
+### Failure Modes
+
+- Audience agent sounds like a cheerleader → persona is too generic. Tighten constraints.
+- Audience agent rejects everything → skepticism profile is too aggressive. Match to real ICP.
+- Answers feel detached from the idea → persona wasn't built from the pre-flight input.
+  Reconstruct from the actual ICP stated in check #1, not a generic buyer.
 
 ---
 
@@ -250,25 +341,16 @@ When activated:
 3. Score and rank the pivots by survivability
 4. Present the best pivot as the recommended next direction
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-PIVOT ENGINE — original idea did not survive
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```markdown
+## Pivot Engine — original idea did not survive
 
-PIVOT 1: [one paragraph]
-Mini-battle: [3 animals, 1 round]
-Survivability: [HIGH / MEDIUM / LOW] — [one sentence]
+| # | Pivot | Survivability | Verdict |
+|---|---|---|---|
+| 1 | [one-paragraph description] | **HIGH / MEDIUM / LOW** | [one sentence] |
+| 2 | [one-paragraph description] | **HIGH / MEDIUM / LOW** | [one sentence] |
+| 3 | [one-paragraph description] | **HIGH / MEDIUM / LOW** | [one sentence] |
 
-PIVOT 2: [one paragraph]
-Mini-battle: [3 animals, 1 round]
-Survivability: [HIGH / MEDIUM / LOW] — [one sentence]
-
-PIVOT 3: [one paragraph]
-Mini-battle: [3 animals, 1 round]
-Survivability: [HIGH / MEDIUM / LOW] — [one sentence]
-
-Recommended pivot: [N] — [one sentence why]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**Recommended:** Pivot [N] — [one sentence why]
 ```
 
 In subagent mode, run all 3 mini-battles in parallel (9 subagents total — 3 per pivot).
@@ -278,73 +360,100 @@ In fallback mode, run sequentially.
 
 ## Step 3 — Apex Output
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-APEX PREDATOR
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[emoji] [Animal]
-[Why this agent was unkillable — what made its attack survive every round]
+```markdown
+## Apex Predator — [emoji] [Animal]
 
-God Agent hypothesis verdict: [Was the pre-battle hypothesis confirmed or
-was something unexpected the true killer? One sentence.]
+[Why unkillable — 2 sentences max]
 
-THE FALLEN
-[emoji] [Animal] — [Insight contributed before elimination]
-[...]
+**Hypothesis verdict:** [confirmed or surprised? One sentence.]
 
-THE EVOLVED IDEA
-[Battle-hardened final version incorporating every round's patch.
-Specific and concrete. This is the idea that survived the full ecosystem.]
+### Idea Evolution
 
-UNFAIR ADVANTAGE STATEMENT
-[One sentence. The structural compounding advantage that makes this idea
-genuinely difficult to replicate. A competitor reading this should pause.
-Not marketing copy.]
+| Round | Patch | Trigger |
+|---|---|---|
+| R1 | [concrete change] | [which threat forced it] |
+| R2 | [concrete change] | [which threat forced it] |
+| ... | ... | ... |
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-BATTLE QUALITY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Execution mode:          [SUBAGENT / FALLBACK]
-Role-lock integrity:     ████████░░  [X]/10  [one line — did attacks stay independent?]
-Animal specificity:      ████████░░  [X]/10  [one line — were roles specific to this idea?]
-Kill Shot lethality:     ████████░░  [X]/10  [one line — were kill shots concrete and testable?]
+### The Fallen
 
-Overall: [HIGH / MEDIUM / DEGRADED]
+| | Animal | Round | Key Contribution |
+|---|---|---|---|
+| [emoji] | [Animal] | R[N] | [insight contributed before elimination] |
+| ... | ... | ... | ... |
 
-[If DEGRADED: specific reason and what to do — re-run with tighter roles,
-reduce agent count, or sharpen the idea description first.]
+### The Evolved Idea
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-AUDIENCE CHECK
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[ICP persona — constructed from the sharpened input in pre-flight]
-Verdict: [YES / MAYBE / NO]
-Would pay because: [one sentence]
-Would hesitate because: [one sentence]
-Would say yes immediately if: [one sentence]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[Battle-hardened final version. Specific, concrete. This is the idea
+that survived the full ecosystem. One focused paragraph.]
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NEXT MOVE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Validate before building: [One specific thing to test in the real world first]
-Build first:              [The one feature that proves the unfair advantage]
-Never build:              [The feature that sounds important but lost every round]
+### Unfair Advantage
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-BATTLE LOG — for future sessions
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[Date] | [Original idea in one sentence] | [Final evolved idea in one sentence]
-Apex: [animal] | UAS: [unfair advantage statement]
-Key patches: [3 bullet points of what changed during the battle]
+> [One sentence. Structural compounding advantage. A competitor
+> reading this should pause. Not marketing copy.]
 
-[Paste this block into your next food chain session to build on prior battles
-rather than starting from zero.]
+---
 
-COMPANION SKILLS
-→ "apex to action" — turn this battle into a 90-day execution plan
-→ "food chain monitor" — re-test this idea after changes or pivots
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### Audience Check
+
+**ICP:** [persona — role, context, constraints, trigger]
+**Confidence:** [HIGH / MEDIUM / LOW]
+
+| | |
+|---|---|
+| **Verdict** | [YES / MAYBE / NO] |
+| **Would pay because** | [one sentence] |
+| **Immediate yes if** | [one sentence] |
+| **Immediate no if** | [one sentence] |
+| **What's confusing** | [one sentence — part of pitch that doesn't land] |
+| **Who else to tell** | [specific role/community, or "nobody" — distribution signal] |
+
+---
+
+### Battle Quality
+
+| Dimension | Score | Note |
+|---|---|---|
+| Execution mode | [SUBAGENT / FALLBACK] | |
+| Role-lock integrity | [X]/10 | [one line] |
+| Animal specificity | [X]/10 | [one line] |
+| Kill shot lethality | [X]/10 | [one line] |
+| **Overall** | **[HIGH / MEDIUM / DEGRADED]** | |
+
+---
+
+### Change Monday
+
+Top 3 findings ranked by what changes the builder's next action. Not scored by
+attack quality — scored by "does this alter what you do tomorrow?"
+
+| Priority | Finding | Action |
+|---|---|---|
+| 1 | [most actionable finding — one sentence] | [specific thing to change or test — one sentence] |
+| 2 | [second finding] | [action] |
+| 3 | [third finding] | [action] |
+
+### Next Move
+
+- **Validate first:** [one specific real-world test]
+- **Build first:** [one feature that proves the unfair advantage]
+- **Never build:** [feature that sounds important but lost every round]
+
+---
+
+### Battle Log
+
+Copy this block into your next food chain session to build on prior battles.
+
+> **Date:** [date]
+> **Original:** [one sentence]
+> **Evolved:** [one sentence]
+> **Apex:** [animal] | **UAS:** [unfair advantage statement]
+> **Key patches:** [3 bullets]
+
+**Companion skills:**
+- `apex to action` — turn this into a 90-day execution plan
+- `food chain monitor` — re-test after changes or pivots
 ```
 
 ---
@@ -379,46 +488,6 @@ different from the original. That is the intended outcome.
 
 ## Validated Output
 
-Three tests across different domains with no parameter tuning between tests.
-
-**Test 1 — Idea restructured (B2B SaaS, GST compliance, India):**
-
-| Dimension | Standard Critique | Food Chain |
-|---|---|---|
-| ICP | "Indian freelancers" | Newly-registered, 0–2 years, enterprise-triggered |
-| Core flaw | Market is crowded | ICP graduates out of needing the product at month 18 |
-| Distribution | Not addressed | Embed at the enterprise trigger event |
-| Competition | Named Zoho | CA bulk pricing is the actual model to beat |
-| Unfair advantage | Not identified | First-mover data ownership from day one of registration |
-
-**Test 2 — Idea killed and redirected (Consumer marketplace, SEA meal-kit):**
-
-| Dimension | Standard Critique | Food Chain |
-|---|---|---|
-| Core flaw | Logistics too complex | Original problem has adequate informal solutions |
-| Pivots generated | None | Three successive pivots, each attacked in the next round |
-| Format insight | Not addressed | Hostel user profile is opposite of meal-kit buyer |
-| Final output | "Do not build" | Hyper-local certification mark, under $50k, no platform dependency |
-| Unfair advantage | Not identified | Trust asset built on operator relationships — cannot be platform-replicated |
-
-**Test 3 — Idea validated (Developer tool, TypeScript API client generator):**
-
-Idea: Open-source CLI that generates type-safe API clients from OpenAPI specs,
-zero configuration. Free forever. Monetized via hosted cloud dashboard at $29/month.
-
-Ecosystem assigned: Raccoon (no-code DIY), Tapeworm (GitHub/npm dependency),
-Tortoise (existing Swagger codegen tools), Shark (Postman entering the space).
-
-Result after 3 rounds: Raccoon eliminated in round 1 (CLI users do not use no-code
-tools — wrong ICP for the attack). Tortoise eliminated in round 2 (existing codegen
-tools require configuration — the zero-config moat held). Tapeworm survived
-(GitHub Actions dependency is real). Shark survived (Postman distribution threat is real).
-
-Early termination applied after round 3. Patches were cosmetic — cloud dashboard
-pricing adjusted, GitHub Actions fallback documented. Core thesis survived intact.
-
-Unfair Advantage Statement: The zero-configuration constraint forces an architectural
-discipline that configuration-based tools cannot retroactively adopt without breaking
-their existing user base.
-
-This test confirms the skill does not manufacture weakness. Strong ideas survive.
+See [`references/validated-output.md`](references/validated-output.md) for three tests
+across different domains (B2B SaaS restructured, consumer marketplace killed, developer
+tool validated) with benchmark methodology notes.
