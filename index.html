@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Food Chain — A Field Guide to Idea Predators</title>
-  <meta name="description" content="64 animals. Elimination rounds. Only the strongest ideas survive. An adversarial stress-testing field guide for Claude Code.">
+  <meta name="description" content="68 animals. Elimination rounds. Only the strongest ideas survive. An adversarial stress-testing field guide for Claude Code.">
   <meta property="og:title" content="Food Chain — Your Idea Has Predators">
-  <meta property="og:description" content="64 animals. Elimination rounds. A field guide to adversarial stress-testing.">
+  <meta property="og:description" content="68 animals. Elimination rounds. A field guide to adversarial stress-testing.">
   <meta property="og:image" content="banner.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -855,6 +855,22 @@
       .orbit-animal { animation: none !important; }
     }
     ::selection { background: rgba(45, 80, 22, 0.15); color: var(--text); }
+
+    /* ═══ GitHub / Badges ═══ */
+    .nav-github {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-family: var(--mono); font-size: 0.78rem;
+      color: var(--text-dim); text-decoration: none;
+      padding: 0.25rem 0.65rem; border: 1px solid var(--border);
+      border-radius: 2px; transition: all 0.3s; white-space: nowrap;
+    }
+    .nav-github:hover { border-color: var(--green-mid); color: var(--green); }
+    .nav-github svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .hero-badges { display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .hero-badges img { height: 20px; }
+    @media (max-width: 768px) {
+      .nav-github span { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -873,6 +889,7 @@
         <a href="#skills">Chapters</a>
         <a href="#install">Install</a>
       </div>
+      <a href="https://github.com/CodedRichy/food-chain-ideation" class="nav-github" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -884,10 +901,16 @@
       <div class="hero-content">
         <div class="hero-label">A Field Guide to Adversarial Stress-Testing</div>
         <h1 class="hero-title">Your idea has<br><span class="accent">predators.</span></h1>
-        <p class="hero-subtitle">64 specimens catalogued. Elimination rounds. Only the strongest ideas survive in the wild. A battle-testing suite for Claude Code.</p>
+        <p class="hero-subtitle">68 specimens catalogued. Elimination rounds. Only the strongest ideas survive in the wild. A battle-testing suite for Claude Code.</p>
         <div class="hero-ctas">
-          <a href="#demo" class="btn btn-primary">Watch an Observation</a>
-          <a href="#install" class="btn btn-secondary">Install the Guide</a>
+          <a href="#install" class="btn btn-primary">Install the Guide</a>
+          <a href="https://github.com/CodedRichy/food-chain-ideation" class="btn btn-secondary" target="_blank" rel="noopener">&#9733; Star on GitHub</a>
+          <a href="#demo" class="btn btn-secondary">Watch a Battle</a>
+        </div>
+        <div class="hero-badges">
+          <img alt="GitHub stars" src="https://img.shields.io/github/stars/CodedRichy/food-chain-ideation?style=flat&color=2d5016&labelColor=f0ebe1">
+          <img alt="License" src="https://img.shields.io/github/license/CodedRichy/food-chain-ideation?style=flat&color=2d5016&labelColor=f0ebe1">
+          <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-0-2d5016?style=flat&labelColor=f0ebe1">
         </div>
       </div>
       <div class="ecosystem-viz" id="ecosystemViz">
@@ -915,7 +938,7 @@
   <section class="stats" id="stats">
     <div class="stats-inner">
       <div class="stat reveal">
-        <span class="stat-number" data-target="64">0</span>
+        <span class="stat-number" data-target="68">0</span>
         <span class="stat-label">specimens catalogued</span>
       </div>
       <div class="stat reveal reveal-delay-1">
@@ -923,8 +946,8 @@
         <span class="stat-label">chapters written</span>
       </div>
       <div class="stat reveal reveal-delay-2">
-        <span class="stat-number" data-target="8">0</span>
-        <span class="stat-label">categories identified</span>
+        <span class="stat-number" data-target="16">0</span>
+        <span class="stat-label">attack categories</span>
       </div>
       <div class="stat reveal reveal-delay-3">
         <span class="stat-number" data-target="0">0</span>
@@ -1156,9 +1179,10 @@
       <h2 class="section-title reveal">The Specimens</h2>
       <div class="section-note reveal">~ each animal represents a distinct, documented threat vector ~</div>
       <div class="animal-filters reveal" id="animalFilters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="product">Product (32)</button>
-        <button class="filter-btn" data-filter="code">Code (20)</button>
+        <button class="filter-btn active" data-filter="all">All (68)</button>
+        <button class="filter-btn" data-filter="product">Product (35)</button>
+        <button class="filter-btn" data-filter="code">Code (21)</button>
+        <button class="filter-btn" data-filter="pitch">Pitch (12)</button>
       </div>
       <div class="specimen-board reveal">
         <div class="animal-grid" id="animalGrid"></div>
@@ -1359,7 +1383,7 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <span class="footer-credit">Field guide by <a href="https://github.com/CodedRichy" target="_blank" rel="noopener">Rishi Praseeth Krishnan</a></span>
+      <span class="footer-credit">Field guide by <a href="https://github.com/CodedRichy" target="_blank" rel="noopener">Rishi Praseeth Krishnan</a> &middot; <a href="https://github.com/CodedRichy/food-chain-ideation" target="_blank" rel="noopener">GitHub</a> &middot; <a href="https://github.com/CodedRichy/food-chain-ideation/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribute</a> &middot; <a href="https://github.com/CodedRichy/food-chain-ideation/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></span>
       <span class="footer-tagline">No ideas were permanently harmed.</span>
       <span class="footer-version">v2.1.0</span>
     </div>
@@ -1367,20 +1391,93 @@
 
   <script>
     const ANIMALS = [
+      // ── PRODUCT: Cunning (6) ──
       { emoji: '\u{1F426}\u{200D}\u{2B1B}', name: 'Crow', cat: 'product', tag: 'Cunning', dna: 'Forensic reverse-engineer. Deconstructs your product into commodity components and shows each one is replicable.', kills: 'Proving each layer can be rebuilt cheaper', best: 'AI wrappers, aggregator plays, thin-moat SaaS' },
       { emoji: '\u{1F98A}', name: 'Fox', cat: 'product', tag: 'Cunning', dna: 'Trust architect. Simulates trust-destruction events: data breach, downtime during launch, founder scandal.', kills: 'Revealing single points of trust failure', best: 'Health, finance, sensitive data products' },
-      { emoji: '\u{1F40D}', name: 'Snake', cat: 'product', tag: 'Cunning', dna: 'Price undercutter. Models the scenario where a competitor offers 80% of your value at 20% of the price.', kills: 'The race to free from an unexpected angle', best: 'Premium tools, products with OSS alternatives' },
+      { emoji: '\u{1F40D}', name: 'Snake', cat: 'product', tag: 'Cunning', dna: 'Price undercutter. Models a competitor offering 80% of your value at 20% of the price.', kills: 'The race to free from an unexpected angle', best: 'Premium tools, products with OSS alternatives' },
+      { emoji: '\u{1F419}', name: 'Octopus', cat: 'product', tag: 'Cunning', dna: 'Eight angles simultaneously. Shows how solving the stated weakness creates two new weaknesses.', kills: 'The compounding failure — fixing one thing breaks another', best: 'Pivots, late-stage feature additions, interdependent assumptions' },
+      { emoji: '\u{1F98E}', name: 'Chameleon', cat: 'product', tag: 'Cunning', dna: 'The competitor who looks nothing like a competitor. The adjacent product that silently eats your market.', kills: 'The non-obvious substitute users switch to', best: 'Consumer apps, tools competing with behavior not software' },
       { emoji: '\u{1F982}', name: 'Scorpion', cat: 'product', tag: 'Cunning', dna: 'Loyalty poisoner. Finds the exact moment your power users have incentive to leave.', kills: 'The graduation moment users outgrow you', best: 'Prosumer tools, creator platforms' },
+      // ── PRODUCT: Scavenger (4) ──
+      { emoji: '\u{1F9B4}', name: 'Hyena', cat: 'product', tag: 'Scavenger', dna: 'Steals kills. Waits for others to prove the market, then takes it with superior distribution.', kills: 'Identifying who copies this once proven and why they win', best: 'Ideas requiring market education, first-mover plays without moats' },
+      { emoji: '\u{1F985}', name: 'Vulture', cat: 'product', tag: 'Scavenger', dna: 'Circles patiently. Detects decay from miles away. Identifies the vulnerability window between launch and sustainability.', kills: 'The burn-rate cliff where growth hasn\'t caught cost', best: 'Capital-intensive ideas, marketplace businesses' },
+      { emoji: '\u{1F980}', name: 'Crab', cat: 'product', tag: 'Scavenger', dna: 'Pulls others down. Internal resistance from people who benefit from the status quo staying broken.', kills: 'The specific person who loses if this succeeds and can block it', best: 'Enterprise sales, B2B tools requiring behavioral change' },
+      { emoji: '\u{1F99D}', name: 'Raccoon', cat: 'product', tag: 'Scavenger', dna: 'Resourceful bootstrapper. Builds a "good enough" version from free tools and undercuts on price.', kills: 'The scrappy clone built in a weekend, priced at zero', best: 'Productivity tools, anything replicable with no-code' },
+      // ── PRODUCT: Brute Force (5) ──
+      { emoji: '\u{1F981}', name: 'Lion', cat: 'product', tag: 'Brute Force', dna: 'Territorial incumbent. Does not need to win — just needs the challenger to lose.', kills: 'Territory defense — building "good enough" and flooding channels', best: 'Ideas adjacent to a large player\'s core business' },
+      { emoji: '\u{1F418}', name: 'Elephant', cat: 'product', tag: 'Brute Force', dna: 'Enterprise behemoth. Solves this problem as a side project with 100x the budget.', kills: 'Resource asymmetry over a 24-month horizon', best: 'Infrastructure plays, developer tools, deep integration products' },
       { emoji: '\u{1F988}', name: 'Shark', cat: 'product', tag: 'Brute Force', dna: 'Incumbent cloner. Simulates a trillion-dollar company adding your core feature as a checkbox.', kills: 'Feature absorption by platform owners', best: 'Any feature adjacent to FAANG products' },
-      { emoji: '\u{1F43A}', name: 'Wolf', cat: 'product', tag: 'Brute Force', dna: 'Blitzscale predator. Well-funded clone launches in three markets simultaneously using your playbook.', kills: 'Speed + capital overwhelming first-mover', best: 'Marketplaces, delivery, network-effect plays' },
+      { emoji: '\u{1F43A}', name: 'Wolf', cat: 'product', tag: 'Brute Force', dna: 'Blitzscale predator. Well-funded clone launches in three markets using your playbook.', kills: 'Speed + capital overwhelming first-mover', best: 'Marketplaces, delivery, network-effect plays' },
+      { emoji: '\u{1F98F}', name: 'Rhinoceros', cat: 'product', tag: 'Brute Force', dna: 'Regulatory steamroller. Industry body that moves against disruption with unstoppable force.', kills: 'Institutional intervention making the model unviable', best: 'Fintech, healthtech, anything disrupting licensed professions' },
+      // ── PRODUCT: Inertia (4) ──
+      { emoji: '\u{1F422}', name: 'Tortoise', cat: 'product', tag: 'Inertia', dna: 'Entrenched incumbent behavior that survived every previous disruption wave. Switching costs exceed benefits.', kills: 'The inertia argument — switching cost > switching benefit', best: 'B2B tools replacing existing workflows, enterprise software' },
+      { emoji: '\u{1F9A6}', name: 'Otter', cat: 'product', tag: 'Inertia', dna: 'Target user already built a good-enough solution with free tools. No pain strong enough to justify switching.', kills: 'The DIY counter — existing free solution with zero friction', best: 'Productivity tools, anything competing with spreadsheets' },
+      { emoji: '\u{1F410}', name: 'Goat', cat: 'product', tag: 'Inertia', dna: 'Non-logical emotional or cultural reason adoption fails. Not economics — identity, habit, or signaling.', kills: 'The emotional barrier users won\'t admit in interviews', best: 'Consumer behavior change, cultural products' },
+      { emoji: '\u{1F402}', name: 'Ox', cat: 'product', tag: 'Inertia', dna: 'Manual process done by humans at scale, "good enough" and cheaper than software at this price.', kills: 'Human labor counter — outsourcing is cheaper and trusted', best: 'Automation tools where labor is cheap, AI replacing judgment' },
+      // ── PRODUCT: Parasite (3) ──
       { emoji: '\u{1FAB1}', name: 'Tapeworm', cat: 'product', tag: 'Parasite', dna: 'Platform dependency. Maps every external dependency and simulates each one cutting you off.', kills: 'The platform you depend on becoming your competitor', best: 'Apps on Shopify, Salesforce, iOS, social APIs' },
+      { emoji: '\u{1F41F}', name: 'Remora', cat: 'product', tag: 'Parasite', dna: 'Attached to a single host. Partnership whose loss removes 80% of distribution overnight.', kills: 'The dependency collapse from one relationship dissolving', best: 'Partnership-dependent models, white-label products' },
+      { emoji: '\u{1F577}\u{FE0F}', name: 'Spider', cat: 'product', tag: 'Parasite', dna: 'Aggregator that sits between product and customer, slowly disintermediating the relationship.', kills: 'The aggregation trap — distribution partner becomes the brand', best: 'B2B2C models, marketplace sellers' },
+      // ── PRODUCT: Environmental (4) ──
+      { emoji: '\u{1FABC}', name: 'Jellyfish', cat: 'product', tag: 'Environmental', dna: 'Pure environmental dependency. The macro condition — funding, regulation, platform policy — that must remain stable.', kills: 'The macro reversal making the model non-viable', best: 'VC-dependent models, regulatory-adjacent ideas' },
       { emoji: '\u{1F99F}', name: 'Mosquito', cat: 'product', tag: 'Environmental', dna: 'Regulation sensor. Finds the specific regulation that makes your core loop illegal.', kills: 'Regulatory kill shots from GDPR, HIPAA, etc.', best: 'Data-heavy, cross-border, health/finance' },
-      { emoji: '\u{1F40A}', name: 'Crocodile', cat: 'product', tag: 'Environmental', dna: 'Patience predator. Waits for you to validate the market, then strikes when you have traction.', kills: 'Late-entry competitors who skip your R&D', best: 'Novel categories, first-movers' },
+      { emoji: '\u{1F40A}', name: 'Crocodile', cat: 'product', tag: 'Environmental', dna: 'Patience predator. Waits for you to validate the market, then strikes with proven model.', kills: 'Late-entry competitors who skip your R&D costs', best: 'Novel categories, first-movers' },
+      { emoji: '\u{1F98B}', name: 'Butterfly Effect', cat: 'product', tag: 'Environmental', dna: 'Tiny cause, massive consequence. Single upstream dependency whose failure cascades non-linearly.', kills: 'The cascade — one supplier/API loss triggers system collapse', best: 'Complex multi-dependency systems, API-dependent products' },
+      // ── PRODUCT: Psychological (4) ──
       { emoji: '\u{1F412}', name: 'Chimpanzee', cat: 'product', tag: 'Psychological', dna: 'Copycat improver. Copies your product but adds the one feature your users keep requesting.', kills: 'Feature parity plus the thing you refused to build', best: 'Opinionated products, vocal communities' },
-      { emoji: '\u{1F9A5}', name: 'Sloth', cat: 'code', tag: 'Maintenance', dna: 'Year-3 maintainer. Fast-forwards 36 months. Who maintains this when the team has rotated?', kills: 'Architecture requiring tribal knowledge to operate', best: 'Monoliths, custom frameworks' },
+      { emoji: '\u{1F99C}', name: 'Parrot', cat: 'product', tag: 'Psychological', dna: 'Better-funded competitor who can\'t build but can market. Wins on share of voice, not quality.', kills: 'Marketing budget asymmetry making your product invisible', best: 'B2C products, developer tools where mindshare drives adoption' },
+      { emoji: '\u{1F413}', name: 'Rooster', cat: 'product', tag: 'Psychological', dna: 'Influencer or community figure who shapes the narrative against you for social reasons.', kills: 'Narrative capture — high-credibility voice frames product negatively', best: 'Developer tools, community-driven products' },
+      { emoji: '\u{1F43A}\u{1F411}', name: 'Wolf in Sheep\'s Clothing', cat: 'product', tag: 'Psychological', dna: 'Partner who appears aligned but extracts value after dependency is established.', kills: 'The betrayal — contract clause buried until leverage shifts', best: 'Partnership-dependent models, investor-heavy businesses' },
+      // ── PRODUCT: Specific (5) ──
+      { emoji: '\u{1FAB2}', name: 'Bombardier Beetle', cat: 'product', tag: 'Specific', dna: 'Small technical constraint ignored during ideation that becomes an explosive blocker at scale.', kills: 'The technical ceiling — works at 100 users, fails at 10,000', best: 'Technical products with untested scale assumptions' },
+      { emoji: '\u{1F9A1}', name: 'Badger', cat: 'product', tag: 'Specific', dna: 'Obsessive niche competitor who only needs to own the segment that makes your economics work.', kills: 'The niche siege — losing money in your key segment indefinitely', best: 'Platform businesses, freemium models with narrow paying segments' },
+      { emoji: '\u{1F994}', name: 'Hedgehog', cat: 'product', tag: 'Specific', dna: 'Entrenched specialist who owns one narrow problem so completely that entry is irrational.', kills: 'Depth asymmetry — 10 years of domain data and relationships', best: 'Horizontal tools expanding into verticals with specialists' },
+      { emoji: '\u{1F98C}', name: 'Deer', cat: 'product', tag: 'Specific', dna: 'Risk-averse buyer driven by fear of being wrong. Will never be the first buyer.', kills: 'Social proof chicken-and-egg — won\'t buy without references', best: 'Enterprise software, high-ticket B2B tools' },
+      { emoji: '\u{1F421}', name: 'Pufferfish', cat: 'product', tag: 'Specific', dna: 'Competitor that appears small but has a hidden capability — IP, patent, data asset — lethal at scale.', kills: 'The hidden weapon — IP irrelevant at small scale, existential at Series A', best: 'Data-dependent products, spaces with active patent activity' },
+      // ── CODE: Maintenance (4) ──
+      { emoji: '\u{1F9A5}', name: 'Sloth', cat: 'code', tag: 'Maintenance', dna: 'Year-3 maintainer. Fast-forwards 36 months. Who maintains this when the team has rotated?', kills: 'Architecture requiring tribal knowledge to operate', best: 'Monoliths, custom frameworks, heavy metaprogramming' },
+      { emoji: '\u{1F41B}', name: 'Termite', cat: 'code', tag: 'Maintenance', dna: 'Dependency rot. Finds the transitive dependency four levels deep maintained by one person.', kills: 'The abandonment cascade — can\'t upgrade, can\'t keep, can\'t replace', best: 'Deep dependency trees, niche libraries for core functionality' },
+      { emoji: '\u{1F997}', name: 'Moth', cat: 'code', tag: 'Maintenance', dna: 'Documentation ghost. Drawn to working code, ignores the why, the constraints, the rejected alternatives.', kills: 'Oral tradition collapse — only person who knows the why has left', best: 'Self-documenting code philosophies, complex business logic' },
+      { emoji: '\u{1F33F}', name: 'Kudzu', cat: 'code', tag: 'Maintenance', dna: 'Config sprawl. Env vars, YAML, feature flags, DB settings, admin toggles — all interacting unpredictably.', kills: 'Configuration paradox — infinitely configurable, impossible to reason about', best: 'Multi-config-layer systems, feature-flag-heavy architectures' },
+      // ── CODE: Scale (5) ──
       { emoji: '\u{1F418}', name: 'Elephant', cat: 'code', tag: 'Scale', dna: '100x load tester. What happens at 100x current traffic with zero architecture changes?', kills: 'The first bottleneck with no horizontal path', best: 'DB schema decisions, real-time systems' },
+      { emoji: '\u{1F427}', name: 'Penguin', cat: 'code', tag: 'Scale', dna: 'Cold start tester. Kills the process and restarts from zero. No warm caches, no JIT, no pools.', kills: 'Cold start stampede — 40x latency during deployment rollouts', best: 'JVM services, ML inference, large in-memory caches' },
+      { emoji: '\u{1F41F}', name: 'Domino Fish', cat: 'code', tag: 'Scale', dna: 'Cascade failure finder. One slow dependency takes down the entire system through filled thread pools.', kills: 'The missing bulkhead — no component fails independently', best: 'Microservices without chaos engineering' },
+      { emoji: '\u{1F9DB}', name: 'Leech', cat: 'code', tag: 'Scale', dna: 'Memory leak hunter. Runs the system 72 hours under normal load and watches the memory graph.', kills: 'The slow death — OOM-kills on hour 49 under production patterns', best: 'Long-running services, event-driven listener patterns' },
+      { emoji: '\u{1F403}', name: 'Wildebeest', cat: 'code', tag: 'Scale', dna: 'Thundering herd finder. All concurrent requests discover cache expiry simultaneously.', kills: 'Synchronization bomb — N actors take the same expensive action at once', best: 'TTL-based caching without jitter, cron-heavy architectures' },
+      // ── CODE: Security (4) ──
       { emoji: '\u{1F99D}', name: 'Raccoon', cat: 'code', tag: 'Security', dna: 'Penetration tester. Finds the three most obvious security holes in minutes.', kills: 'The attack vector you assumed was someone else\'s job', best: 'Auth systems, API design, data pipelines' },
+      { emoji: '\u{1F989}', name: 'Owl', cat: 'code', tag: 'Security', dna: 'Data auditor. Follows a single piece of PII through the entire system — storage, logs, analytics, backups.', kills: 'The data ghost — PII copy nobody remembers creating', best: 'Multiple data stores, event sourcing, request body logging' },
+      { emoji: '\u{1F98F}', name: 'Rhinoceros', cat: 'code', tag: 'Security', dna: 'Compliance officer. Opens the regulatory checklist. GDPR, SOC 2, HIPAA, PCI DSS.', kills: 'Architectural decision making a regulation impossible to satisfy', best: 'Systems handling PII, event-sourced in regulated industries' },
+      { emoji: '\u{1F426}', name: 'Cuckoo', cat: 'code', tag: 'Security', dna: 'Supply chain attacker. Examines the build pipeline for typosquatting, mutable tags, compromised deps.', kills: 'Trust chain compromise — compromised upstream artifact gains code execution', best: 'Large dependency trees, CI/CD with mutable references' },
+      // ── CODE: Team (4) ──
       { emoji: '\u{1F425}', name: 'Duckling', cat: 'code', tag: 'Team', dna: 'New hire simulator. Day-one onboarding: can they ship a feature without tribal knowledge?', kills: 'The undocumented step blocking every new engineer', best: 'Legacy systems, rapid-growth teams' },
+      { emoji: '\u{1F9A4}', name: 'Dodo', cat: 'code', tag: 'Team', dna: 'Bus factor mapper. Who understands the payment system? One person. What if they leave?', kills: 'Knowledge extinction — all operational knowledge in one head', best: 'Solo-specialist components, single-author modules' },
+      { emoji: '\u{1F415}', name: 'Dalmatian', cat: 'code', tag: 'Team', dna: 'Firefighter at 3am. PagerDuty fires. Which dashboard? Logs in different systems, no correlation IDs.', kills: 'Observability gap — MTTD exceeds 30 minutes', best: 'Microservices without distributed tracing' },
+      { emoji: '\u{1F985}', name: 'Hawk', cat: 'code', tag: 'Team', dna: 'Code reviewer. 47 files changed, 2,300 lines. Can anyone verify this doesn\'t break something?', kills: 'Unreviewable changes — PRs too large to meaningfully evaluate', best: 'High coupling between modules, typical PR exceeds 400 lines' },
+      // ── CODE: Integration (4) ──
+      { emoji: '\u{1F41F}', name: 'Remora', cat: 'code', tag: 'Integration', dna: 'API consumer tracker. Catalogs every consumer, changes one thing, maps the blast radius.', kills: 'Breaking change cascade — consumers you didn\'t know existed', best: 'APIs without versioning, contracts defined by code not spec' },
+      { emoji: '\u{1F41F}', name: 'Salmon', cat: 'code', tag: 'Integration', dna: 'Migration challenger. How do you get from here to there? Schema migration on 400M rows. Rollback plan?', kills: 'Irreversible migration with no safe rollback from partial state', best: 'Large table schema changes, service extractions from monoliths' },
+      { emoji: '\u{1F9AA}', name: 'Barnacle', cat: 'code', tag: 'Integration', dna: 'Vendor lock detector. Maps every vendor-specific architectural assumption. Migration cost?', kills: 'Lock-in audit — migration cost exceeds rebuilding from scratch', best: 'Managed services for core logic, serverless on single cloud' },
+      { emoji: '\u{1F422}', name: 'Tortoise', cat: 'code', tag: 'Integration', dna: 'Backward compat burden. Carries entire history on its back. What % of time spent on old versions?', kills: 'Compatibility anchor — old versions can\'t be retired', best: 'APIs with multiple versions, SDKs distributed to consumers' },
+      // ── PITCH: Financial (2) ──
+      { emoji: '\u{1F985}', name: 'Vulture', cat: 'pitch', tag: 'Financial', dna: 'Unit economics forensics. Opens the model, works backward from claimed margins. Finds the gap.', kills: 'The margin mirage — pitch claims healthy economics but math shows otherwise', best: 'Pitches claiming unit economics without full cost stack' },
+      { emoji: '\u{1F40D}', name: 'Python', cat: 'pitch', tag: 'Financial', dna: 'Revenue model constrictor. Squeezes the pricing model with competitive and customer pressure.', kills: 'The pricing squeeze — revenue model collapses under realistic pressure', best: 'SaaS with undifferentiated pricing, high customer concentration' },
+      // ── PITCH: Narrative (3) ──
+      { emoji: '\u{1F9AE}', name: 'Bloodhound', cat: 'pitch', tag: 'Narrative', dna: 'Due diligence tracker. Picks the three boldest claims and traces them to their evidence.', kills: 'The claim gap — assertions that don\'t survive a single follow-up', best: 'Pitches heavy on metrics without methodology' },
+      { emoji: '\u{1F98E}', name: 'Chameleon', cat: 'pitch', tag: 'Narrative', dna: 'Narrative inconsistency finder. Maps implicit assumptions on every slide and finds contradictions.', kills: 'The narrative fracture — slides telling contradictory stories', best: 'Decks assembled by multiple contributors without single owner' },
+      { emoji: '\u{1F414}', name: 'Cuckoo', cat: 'pitch', tag: 'Narrative', dna: 'Borrowed conviction detector. Is this the founder\'s hard-won insight or a VC blog post repackaged?', kills: 'The borrowed thesis — conviction collapses without the framework', best: 'First-time founders in hot sectors, pitches leading with trends' },
+      // ── PITCH: Market (3) ──
+      { emoji: '\u{1F9B4}', name: 'Hyena', cat: 'pitch', tag: 'Market', dna: 'Market sizing forensics. Starts at the TAM and works down with a machete.', kills: 'The TAM fantasy — addressable market inflated by an order of magnitude', best: 'Top-down market sizing without bottom-up validation' },
+      { emoji: '\u{1F994}', name: 'Porcupine', cat: 'pitch', tag: 'Market', dna: 'Defensibility challenger. 30,000 quills — each one a pointed question nobody wants to answer.', kills: 'The defensibility vacuum — every moat replicable within 12 months', best: 'Technical moats without patents, markets where Big Tech is adjacent' },
+      { emoji: '\u{1F997}', name: 'Praying Mantis', cat: 'pitch', tag: 'Market', dna: 'Competition slide auditor. Searches for what is NOT on the slide. The competitor conspicuously absent.', kills: 'The missing competitor whose existence changes the assessment', best: 'Clean 2x2 matrices, competition slides with only 3–4 logos' },
+      // ── PITCH: Founder (1) ──
+      { emoji: '\u{1F9A1}', name: 'Wolverine', cat: 'pitch', tag: 'Founder', dna: 'Founder-market fit challenger. Why are YOU the person to build THIS company?', kills: 'The founder-market gap — specific missing capability causing predictable failure', best: 'Technical founders in regulated markets, credentials over experience' },
+      // ── PITCH: Dependency (2) ──
+      { emoji: '\u{1F99F}', name: 'Mosquito', cat: 'pitch', tag: 'Legal', dna: 'Regulatory detail finder. Small legal/IP issues the pitch treats as footnotes but diligence flags.', kills: 'The compliance compound — 2–3 small issues collectively blocking the raise', best: 'Regulated industries treating compliance as post-raise' },
+      { emoji: '\u{1F41F}', name: 'Remora', cat: 'pitch', tag: 'Dependency', dna: 'Growth dependency tracker. Identifies the single channel the growth narrative depends on.', kills: 'Single-channel cliff — one platform change reduces growth by 50%+', best: 'Growth driven by single acquisition channel' },
+      // ── PITCH: Timing (1) ──
+      { emoji: '\u{1F98E}', name: 'Pangolin', cat: 'pitch', tag: 'Timing', dna: 'Timing attacker. Challenges the "why now" with evidence. Structural advantage or cosmetic trend?', kills: 'The timing illusion — "why now" collapses under scrutiny', best: 'Hot categories where "why now" is just "the technology exists"' },
     ];
 
     const BATTLES = [

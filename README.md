@@ -79,7 +79,7 @@ A tool that only kills ideas is a pessimist. Food Chain produces all three:
 
 ## The animals
 
-64 animals across three libraries. Each has hardcoded behavioral DNA —
+68 animals across three libraries. Each has hardcoded behavioral DNA —
 the God Agent selects, never invents.
 
 **🐦‍⬛ Crow** — Forensic. Finds the structural assumption three levels deep
@@ -99,7 +99,7 @@ as a Tuesday sprint toggle.
 **🦂 Scorpion** — Compliance. GDPR. SOC 2. The thing you forgot until
 a customer's legal team sends the questionnaire.
 
-32 product animals. 20 code-specific animals. 12 pitch animals. Full libraries in
+35 product animals. 21 code-specific animals. 12 pitch animals. Full libraries in
 [`animal-library.md`](skills/food-chain-ideation/references/animal-library.md),
 [`code-animal-library.md`](skills/food-chain-code/references/code-animal-library.md), and
 [`pitch-animal-library.md`](skills/food-chain-pitch/references/pitch-animal-library.md).
