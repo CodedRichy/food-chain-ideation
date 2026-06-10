@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Food Chain — A Field Guide to Idea Predators</title>
-  <meta name="description" content="68 animals. Elimination rounds. Only the strongest ideas survive. An adversarial stress-testing field guide for Claude Code.">
-  <meta property="og:title" content="Food Chain — Your Idea Has Predators">
-  <meta property="og:description" content="68 animals. Elimination rounds. A field guide to adversarial stress-testing.">
-  <meta property="og:image" content="banner.png">
+  <meta name="description" content="Stress-test your startup idea before you build it. 68 AI agents attack from every angle — market, regulation, competition, unit economics. What survives is worth building. A Claude Code skill.">
+  <meta property="og:title" content="Food Chain — Stress-Test Your Idea Before You Build It">
+  <meta property="og:description" content="AI agents attack your startup idea from every angle. 68 animals, elimination rounds, blind scoring. What survives is worth building.">
+  <meta property="og:image" content="https://codedrichy.github.io/food-chain-ideation/banner.png">
+  <meta property="og:url" content="https://codedrichy.github.io/food-chain-ideation/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Food Chain — Stress-Test Your Idea Before You Build It">
+  <meta name="twitter:description" content="AI agents attack your startup idea from every angle. 68 animals, elimination rounds, blind scoring. What survives is worth building.">
+  <meta name="twitter:image" content="https://codedrichy.github.io/food-chain-ideation/banner.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129430;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -134,7 +138,11 @@
     }
     .hero-subtitle {
       font-size: 1.1rem; color: var(--text-dim);
-      margin-bottom: 2.5rem; max-width: 420px; line-height: 1.6;
+      margin-bottom: 0.75rem; max-width: 460px; line-height: 1.6;
+    }
+    .hero-subline {
+      font-family: var(--mono); font-size: 0.82rem; color: var(--green-mid);
+      margin-bottom: 2.5rem; letter-spacing: 0.02em;
     }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn {
@@ -654,7 +662,8 @@
       max-height: 0; overflow: hidden;
       transition: max-height 0.45s ease, padding 0.45s ease;
     }
-    .animal-card:hover .animal-details { max-height: 110px; padding-top: 0.6rem; }
+    .animal-card:hover .animal-details,
+    .animal-card.touch-open .animal-details { max-height: 110px; padding-top: 0.6rem; }
     .animal-detail-line { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
     .animal-detail-line strong { color: var(--text); font-weight: 600; }
 
@@ -899,13 +908,14 @@
   <section class="hero" id="hero">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-label">A Field Guide to Adversarial Stress-Testing</div>
+        <div class="hero-label">A Claude Code Skill for Idea Validation</div>
         <h1 class="hero-title">Your idea has<br><span class="accent">predators.</span></h1>
-        <p class="hero-subtitle">68 specimens catalogued. Elimination rounds. Only the strongest ideas survive in the wild. A battle-testing suite for Claude Code.</p>
+        <p class="hero-subtitle">Describe your product. 68 AI agents attack it from every angle — market risk, competitive threats, regulatory traps, unit economics. What survives is worth building. What doesn't gets three pivots.</p>
+        <p class="hero-subline">Two commands. No dependencies. No config. Installs in 30 seconds.</p>
         <div class="hero-ctas">
-          <a href="#install" class="btn btn-primary">Install the Guide</a>
-          <a href="https://github.com/CodedRichy/food-chain-ideation" class="btn btn-secondary" target="_blank" rel="noopener">&#9733; Star on GitHub</a>
-          <a href="#demo" class="btn btn-secondary">Watch a Battle</a>
+          <a href="#demo" class="btn btn-primary">Watch a Battle</a>
+          <a href="#install" class="btn btn-secondary">Install in 30 Seconds</a>
+          <a href="#battles" class="btn btn-secondary">See Real Results</a>
         </div>
         <div class="hero-badges">
           <img alt="GitHub stars" src="https://img.shields.io/github/stars/CodedRichy/food-chain-ideation?style=flat&color=2d5016&labelColor=f0ebe1">
@@ -1983,6 +1993,13 @@
     function toggleRbCard(btn) {
       const card = btn.closest('.rb-card');
       card.classList.toggle('rb-open');
+    }
+
+    /* ═══ Mobile Animal Card Tap ═══ */
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      document.querySelectorAll('.animal-card').forEach(card => {
+        card.addEventListener('click', () => card.classList.toggle('touch-open'));
+      });
     }
 
     /* ═══ Start ═══ */

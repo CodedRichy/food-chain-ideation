@@ -4,19 +4,8 @@
   <img src="banner.png" alt="Food Chain — Adversarial Stress Test" width="100%" />
 </p>
 
-**Your idea has blind spots. This finds them.**
-
-Food Chain spawns adversarial animal agents — each with hardcoded behavioral DNA —
-and pits them against your product idea in live elimination rounds. The weakest
-argument dies each round. The survivor absorbs its sharpest insight and attacks
-a harder version of your idea. One apex predator remains.
-
-That is the thing worth building.
-
-```
-claude plugin marketplace add CodedRichy/food-chain-ideation
-claude plugin install food-chain-ideation@food-chain-ideation
-```
+**Stress-test your startup idea before you build it.**
+A Claude Code skill — 68 AI agents attack your product idea from every angle in live elimination rounds. What survives is worth building. What doesn't gets three pivots.
 
 ---
 
@@ -74,6 +63,15 @@ A tool that only kills ideas is a pessimist. Food Chain produces all three:
 | **Survived** | Developer tool. Early termination applied — attacks couldn't land structural kills. Core thesis held. |
 | **Restructured** | B2B SaaS. ICP corrected from "Indian freelancers" to "newly-registered, enterprise-triggered, 0–2 years compliance history." Distribution rebuilt. Moat found. |
 | **Killed** | Office meal coordinator. The stated ICP overwhelmingly uses contracted caterers. The problem the product solved didn't exist. Redirected to B2B caterer procurement intelligence — a completely different business. |
+
+### Try it now
+
+```
+claude plugin marketplace add CodedRichy/food-chain-ideation
+claude plugin install food-chain-ideation@food-chain-ideation
+```
+
+Then type: `food chain my idea: [describe your product]`
 
 ---
 

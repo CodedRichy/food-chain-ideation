@@ -12,7 +12,10 @@ description: >
 when_to_use: >
   "food chain", "pressure test", "stress test", "tear this apart",
   "what kills this", "battle test", "adversarial review", "poke holes in this",
-  "what would kill this idea", "attack my idea", "is this idea any good"
+  "what would kill this idea", "attack my idea", "is this idea any good",
+  "validate my idea", "should I build this", "red team my idea",
+  "devil's advocate", "critique my startup", "is my idea viable",
+  "test my business idea", "challenge my idea", "find flaws in my idea"
 argument-hint: "[your idea]"
 ---
 
