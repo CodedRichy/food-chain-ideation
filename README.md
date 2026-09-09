@@ -5,7 +5,7 @@
 </p>
 
 **Stress-test your startup idea before you build it.**
-A Claude Code skill — 68 AI agents attack your product idea from every angle in live elimination rounds. What survives is worth building. What doesn't gets three pivots.
+A Claude Code skill. 68 AI agents attack your product idea from every angle in live elimination rounds. What survives is worth building. What doesn't gets three pivots.
 
 ---
 
@@ -42,27 +42,27 @@ Idea patch: Pivot from "publish automatically" to "draft instantly, creator appr
 ```
 
 Four rounds later, the original "viral content repurposer" was dead. The surviving
-idea — a cross-creator structural intelligence platform — shared almost no DNA with
-what went in. The Crow's final kill: *"Structural intelligence produces convergence.
+idea was a cross-creator structural intelligence platform. It shared almost no DNA
+with what went in. The Crow's final kill: *"Structural intelligence produces convergence.
 Thousands of creators using the same tool produce structurally identical posts.
 The better the product works, the faster it poisons its own signal."*
 
-That insight is not in any critique tool. It emerged because each attacker was
-isolated, role-locked, and forced to find a new angle after each patch.
+No critique tool has that insight sitting in it. It emerged because each attacker
+was isolated, role-locked, and forced to find a new angle after each patch.
 
 > Full transcript: [`battles/viral-content-repurposer.md`](battles/viral-content-repurposer.md)
 
 ---
 
-## Three outcomes, not one
+## Three outcomes
 
 A tool that only kills ideas is a pessimist. Food Chain produces all three:
 
 | Outcome | What happened |
 |---|---|
-| **Survived** | Developer tool. Early termination applied — attacks couldn't land structural kills. Core thesis held. |
+| **Survived** | Developer tool. Early termination applied, because the attacks couldn't land structural kills. Core thesis held. |
 | **Restructured** | B2B SaaS. ICP corrected from "Indian freelancers" to "newly-registered, enterprise-triggered, 0–2 years compliance history." Distribution rebuilt. Moat found. |
-| **Killed** | Office meal coordinator. The stated ICP overwhelmingly uses contracted caterers. The problem the product solved didn't exist. Redirected to B2B caterer procurement intelligence — a completely different business. |
+| **Killed** | Office meal coordinator. The stated ICP overwhelmingly uses contracted caterers. The problem the product solved didn't exist. Redirected to B2B caterer procurement intelligence, a completely different business. |
 
 ### Try it now
 
@@ -77,24 +77,24 @@ Then type: `food chain my idea: [describe your product]`
 
 ## The animals
 
-68 animals across three libraries. Each has hardcoded behavioral DNA —
-the God Agent selects, never invents.
+68 animals across three libraries. Each has hardcoded behavioral DNA.
+The God Agent selects, never invents.
 
-**🐦‍⬛ Crow** — Forensic. Finds the structural assumption three levels deep
+**🐦‍⬛ Crow.** Forensic. Finds the structural assumption three levels deep
 that everyone overlooked. Quiet, then devastating.
 
-**🪱 Tapeworm** — Lives inside the platform you depend on. Invisible until
+**🪱 Tapeworm.** Lives inside the platform you depend on. Invisible until
 you scale. Then the host adds your feature and terminates the relationship.
 
-**🐢 Tortoise** — Has seen every wave of disruption since 2009.
+**🐢 Tortoise.** Has seen every wave of disruption since 2009.
 Has a spreadsheet that works fine.
 
-**🦈 Shark** — The incumbent with 200k users who can ship your feature
+**🦈 Shark.** The incumbent with 200k users who can ship your feature
 as a Tuesday sprint toggle.
 
-**🐘 Elephant** — Microsoft/Google adds it to the bundle. Free. Tomorrow.
+**🐘 Elephant.** Microsoft/Google adds it to the bundle. Free. Tomorrow.
 
-**🦂 Scorpion** — Compliance. GDPR. SOC 2. The thing you forgot until
+**🦂 Scorpion.** Compliance. GDPR. SOC 2. The thing you forgot until
 a customer's legal team sends the questionnaire.
 
 35 product animals. 21 code-specific animals. 12 pitch animals. Full libraries in
@@ -108,11 +108,11 @@ a customer's legal team sends the questionnaire.
 
 | Skill | Purpose |
 |---|---|
-| **food-chain-ideation** | Stress-test product ideas — 35 animals, elimination rounds, blind scoring |
-| **food-chain-code** | Stress-test architecture decisions before writing code — 21 code animals |
-| **food-chain-pitch** | Stress-test investor pitches — 12 pitch animals, investor simulation panel |
+| **food-chain-ideation** | Stress-test product ideas. 35 animals, elimination rounds, blind scoring |
+| **food-chain-code** | Stress-test architecture decisions before writing code. 21 code animals |
+| **food-chain-pitch** | Stress-test investor pitches. 12 pitch animals, investor simulation panel |
 | **apex-to-action** | Turn battle output into a 90-day execution plan with validation gates |
-| **food-chain-monitor** | Re-test after pivots or market shifts — 3 animals, 2 rounds, fast verdict |
+| **food-chain-monitor** | Re-test after pivots or market shifts. 3 animals, 2 rounds, fast verdict |
 
 **Stress-test → Pitch → Execute → Monitor → Re-test.**
 
@@ -129,19 +129,19 @@ agents attack the *patched* version. The attacks compound. The idea evolves.
 The final surviving argument has been pressure-tested by everything the
 ecosystem could generate.
 
-**Subagent mode** — In Claude Code, each animal is a separate agent with
-zero shared context. Role-lock is architectural, not instructional.
-A Crow literally cannot see what the Tapeworm said.
+**Subagent mode.** In Claude Code, each animal is a separate agent with
+zero shared context. Role-lock is architectural. A Crow literally cannot
+see what the Tapeworm said.
 
-**Blind scoring** — Attacks scored by an independent agent that receives
+**Blind scoring.** An independent agent scores the attacks and receives
 them anonymized as "Attacker A", "Attacker B". No animal names.
 No God Agent self-assessment bias.
 
-**Pivot engine** — When an idea is killed, three pivots auto-generate from
+**Pivot engine.** When an idea is killed, three pivots auto-generate from
 the wreckage, each mini-battled and ranked. You don't leave with "don't
 build this." You leave with "build this instead."
 
-**Audience agent** — After the battle, a simulation of your actual ICP
+**Audience agent.** After the battle, a simulation of your actual ICP
 reacts to the evolved idea. "Would you pay for this?"
 
 ---
@@ -185,7 +185,7 @@ cp -r food-chain-ideation/skills ~/.claude/skills
 
 On Windows, `~/.claude/` is `C:\Users\<you>\.claude\`.
 
-Self-contained markdown — no build step, no config, no dependencies.
+Self-contained markdown. No build step, no config, no dependencies.
 
 Works in Claude.ai, Claude Code, Cursor, Windsurf, Copilot.
 
@@ -227,42 +227,42 @@ community makes every existing installation better retroactively.
 <summary>Changelog</summary>
 
 **v2.1.0**
-- food-chain-pitch — investor pitch stress-tester with 12 pitch-specific animals
-- Real-time data mode — agents search for current market data when web tools available
-- Kill shot confidence tags — CONFIRMED / PROBABLE / SPECULATIVE on every attack
-- Scoring reasoning — 1-line justification per scoring dimension
-- Audience panel — 3 ICP simulations replace single audience agent
-- Founder defense agent — active defense between attacks and scoring
-- Animal selection reasoning — transparent selection logic in ecosystem design
-- Battle gallery on website — 4 real battle transcripts browseable
-- Spec alignment — all skills use when_to_use + argument-hint frontmatter
+- food-chain-pitch. Investor pitch stress-tester with 12 pitch-specific animals
+- Real-time data mode. Agents search for current market data when web tools available
+- Kill shot confidence tags. CONFIRMED / PROBABLE / SPECULATIVE on every attack
+- Scoring reasoning. 1-line justification per scoring dimension
+- Audience panel. 3 ICP simulations replace single audience agent
+- Founder defense agent. Active defense between attacks and scoring
+- Animal selection reasoning. Transparent selection logic in ecosystem design
+- Battle gallery on website. 4 real battle transcripts browseable
+- Spec alignment. All skills use when_to_use + argument-hint frontmatter
 
 **v2.0.0**
-- Subagent mode — architecturally enforced role-lock via independent agents
-- Blind scoring agent — anonymous attack evaluation removes self-assessment bias
-- Subagent evolution — one-line patch context enables angle evolution without breaking isolation
-- Audience agent — ICP simulation reacts to evolved idea after battle
-- Pivot engine — auto-generates and mini-battles 3 pivots when idea is killed
-- food-chain-code — architecture decision stress-tester with 20 code-specific animals
-- apex-to-action — battle output → 90-day execution plan with validation gates
-- food-chain-monitor — delta re-testing after changes with 3 animals, 2 rounds max
-- Restructured as multi-skill suite — one install, four skills
+- Subagent mode. Architecturally enforced role-lock via independent agents
+- Blind scoring agent. Anonymous attack evaluation removes self-assessment bias
+- Subagent evolution. One-line patch context enables angle evolution without breaking isolation
+- Audience agent. ICP simulation reacts to evolved idea after battle
+- Pivot engine. Auto-generates and mini-battles 3 pivots when idea is killed
+- food-chain-code. Architecture decision stress-tester with 20 code-specific animals
+- apex-to-action. Battle output → 90-day execution plan with validation gates
+- food-chain-monitor. Delta re-testing after changes with 3 animals, 2 rounds max
+- Restructured as multi-skill suite. One install, four skills
 
 **v1.3.0**
-- Input sharpening — mandatory ICP/geography/problem check before ecosystem design
-- Battle quality score — role-lock integrity, animal specificity, kill shot lethality
-- Next-move block — validate, build first, never build
-- Battle log — compressed session memory for cross-session continuity
+- Input sharpening. Mandatory ICP/geography/problem check before ecosystem design
+- Battle quality score. Role-lock integrity, animal specificity, kill shot lethality
+- Next-move block. Validate, build first, never build
+- Battle log. Compressed session memory for cross-session continuity
 
 **v1.2.0**
-- Pre-flight checks — ecosystem validated before battle starts
-- God Agent hypothesis — kill prediction stated before round 1
-- Early termination rule — strong ideas declared early
+- Pre-flight checks. Ecosystem validated before battle starts
+- God Agent hypothesis. Kill prediction stated before round 1
+- Early termination rule. Strong ideas declared early
 
 **v1.1.0**
 - Anti-pattern combinations added to animal library
 
 **v1.0.0**
-- Initial release — 16 animals, elimination and absorption loop
+- Initial release. 16 animals, elimination and absorption loop
 
 </details>
