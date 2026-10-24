@@ -30,7 +30,7 @@ The attackers are 35 product animals, 12 pitch animals and over 20 code animals.
 
 ## Status
 
-Version 2.1.0. The skills are markdown prompts, so there is nothing to compile. Quality depends on the model you run them in. In Claude Code each animal runs as its own subagent. Elsewhere the role-lock is by instruction only.
+Version 2.1.0. The skills are markdown prompts. Nothing to compile. Quality depends on the model you run them in. In Claude Code each animal runs as its own subagent. Elsewhere the role-lock is by instruction only.
 
 ## Stack
 
